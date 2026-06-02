@@ -3,884 +3,840 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Future of Artificial Intelligence · 2025</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<title>The Future of Artificial Intelligence — 2025</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --bg: #0c1f0c;
-  --card: #142914;
-  --card-light: #eef4ee;
-  --green: #4ade80;
-  --green-mid: #22c55e;
-  --cyan: #38bdf8;
-  --white: #e8f5e8;
-  --dim: #6fa86f;
-}
-html, body { height: 100%; overflow: hidden; }
-body {
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--white);
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ── SLIDE ENGINE ── */
-.deck { position: relative; width: 100vw; height: 100vh; }
-.slide {
-  position: absolute; inset: 0;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.45s ease;
-  display: flex; flex-direction: column;
-}
-.slide.active { opacity: 1; pointer-events: all; }
+  :root {
+    --green: #4ade80;
+    --green-dim: #22c55e;
+    --bg-dark: #0a1a0a;
+    --bg-card: #0f2310;
+    --bg-card2: #152815;
+    --text: #e2f0e2;
+    --text-dim: #7aab7a;
+    --cyan: #67e8f9;
+    --red: #f87171;
+  }
 
-/* ── NAV BAR ── */
-.nav {
-  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-  display: flex; align-items: center; gap: 14px; z-index: 200;
-  background: rgba(5,15,5,0.75); backdrop-filter: blur(10px);
-  padding: 8px 18px; border-radius: 40px;
-  border: 1px solid rgba(74,222,128,0.25);
-}
-.nav-btn {
-  background: none; border: 1px solid rgba(74,222,128,0.4);
-  color: var(--green); width: 32px; height: 32px; border-radius: 50%;
-  cursor: pointer; font-size: 15px; display: flex; align-items: center;
-  justify-content: center; transition: background 0.2s;
-}
-.nav-btn:hover { background: rgba(74,222,128,0.15); }
-.nav-btn:disabled { opacity: 0.25; cursor: default; }
-.dots { display: flex; gap: 7px; }
-.dot {
-  width: 6px; height: 6px; border-radius: 3px;
-  background: rgba(74,222,128,0.3); cursor: pointer;
-  transition: all 0.2s;
-}
-.dot.on { width: 20px; background: var(--green); }
-.counter { font-size: 11px; color: var(--dim); min-width: 36px; text-align: center; }
+  html { scroll-behavior: smooth; }
 
-/* ── SHARED ── */
-.s-pad { padding: 44px 56px; }
-.s-hd { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; }
-.s-title { font-size: clamp(22px,2.8vw,34px); font-weight: 600; }
-.s-tag { font-size: 10px; letter-spacing: 3px; color: var(--green); font-weight: 700; }
-.s-foot {
-  font-size: 12px; color: var(--dim); font-style: italic;
-  border-top: 1px solid rgba(74,222,128,0.12); padding-top: 14px; margin-top: 16px;
-}
+  body {
+    background: var(--bg-dark);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+  }
 
-/* ── SLIDE 1: TITLE ── */
-#s1 { flex-direction: row; background: var(--bg); }
-.s1-left {
-  width: 50%; padding: 64px 56px;
-  display: flex; flex-direction: column; justify-content: center;
-}
-.s1-eyebrow { font-size: 10px; letter-spacing: 4px; color: var(--green); font-weight: 700; margin-bottom: 22px; }
-.s1-h { font-size: clamp(36px,5vw,64px); font-weight: 700; line-height: 1.08; }
-.s1-bar { width: 44px; height: 3px; background: var(--green-mid); margin: 22px 0; }
-.s1-sub { font-size: 15px; color: var(--green); line-height: 1.5; margin-bottom: 10px; }
-.s1-meta { font-size: 12px; color: var(--dim); }
-.s1-right {
-  width: 50%; position: relative;
-  border-left: 2px solid var(--green-mid); overflow: hidden;
-}
-#neural { width: 100%; height: 100%; display: block; }
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,26,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(74,222,128,0.15);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav .logo { font-size: 0.85rem; color: var(--green); letter-spacing: 0.15em; text-transform: uppercase; }
+  nav ul { list-style: none; display: flex; gap: 1.5rem; }
+  nav ul li a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  nav ul li a:hover { color: var(--green); }
 
-/* ── SLIDE 2: NUMBERS ── */
-#s2 { background: var(--bg); }
-.nums-row { display: flex; gap: 36px; flex: 1; align-items: center; }
-.big-num-block { flex: 0 0 auto; }
-.big-num {
-  font-size: clamp(48px,6vw,80px); font-weight: 800; color: var(--green);
-  line-height: 1;
-}
-.big-lbl { font-size: 15px; margin-top: 8px; }
-.big-sub { font-size: 12px; color: var(--dim); margin-top: 4px; }
-.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; flex: 1; }
-.stat-card { background: var(--card); border-radius: 8px; padding: 22px 24px; }
-.stat-n { font-size: clamp(28px,3.5vw,46px); font-weight: 700; color: var(--cyan); line-height: 1; }
-.stat-n.g { color: var(--green); }
-.stat-l { font-size: 12px; color: var(--dim); margin-top: 7px; line-height: 1.4; }
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 80px 2rem 2rem;
+  }
+  #hero canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.35;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    border: 1px solid var(--green);
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .hero-content h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .hero-content h1 span { color: var(--green); }
+  .hero-content p {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+  }
+  .scroll-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    animation: bounce 2s infinite;
+  }
+  .scroll-hint svg { width: 20px; height: 20px; stroke: var(--green); fill: none; }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
 
-/* ── SLIDE 3: COMPUTE ── */
-#s3 { background: var(--bg); }
-.chart-row { display: flex; gap: 36px; flex: 1; align-items: center; min-height: 0; }
-.chart-box { flex: 1; position: relative; min-height: 0; }
-.chart-stats { flex: 0 0 180px; display: flex; flex-direction: column; gap: 28px; }
-.cs-val { font-size: 30px; font-weight: 700; color: var(--green); }
-.cs-lbl { font-size: 12px; color: var(--dim); margin-top: 4px; line-height: 1.4; }
+  /* SECTIONS */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .lead {
+    color: var(--text-dim);
+    font-size: 1rem;
+    margin-bottom: 3rem;
+    max-width: 600px;
+  }
 
-/* ── SLIDE 4: INDUSTRIES ── */
-#s4 { background: var(--bg); }
-.ind-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; flex: 1; }
-.ind-card {
-  background: var(--card); border-radius: 8px; padding: 24px 26px;
-  display: flex; flex-direction: column; gap: 6px;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.ind-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(74,222,128,0.12); }
-.ind-icon { font-size: 26px; margin-bottom: 4px; }
-.ind-name { font-size: 18px; font-weight: 600; }
-.ind-sub { font-size: 12px; color: var(--dim); line-height: 1.4; }
-.ind-metric { font-size: 13px; font-weight: 600; color: var(--cyan); margin-top: 8px; }
+  /* STAT GRID */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(74,222,128,0.12);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .stat-card:hover {
+    border-color: rgba(74,222,128,0.4);
+    transform: translateY(-4px);
+  }
+  .stat-num {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .stat-num.cyan { color: var(--cyan); }
+  .stat-label { font-size: 0.85rem; color: var(--text-dim); }
 
-/* ── SLIDE 5: ADOPTION ── */
-#s5 { background: var(--bg); }
-.adopt-wrap { display: flex; gap: 56px; flex: 1; align-items: center; min-height: 0; }
-.adopt-left { flex: 0 0 320px; }
-.adopt-tag { font-size: 10px; letter-spacing: 3px; color: var(--green); font-weight: 700; margin-bottom: 18px; }
-.adopt-h { font-size: clamp(26px,3.2vw,40px); font-weight: 700; line-height: 1.15; margin-bottom: 18px; }
-.adopt-p { font-size: 13px; color: var(--dim); line-height: 1.6; margin-bottom: 10px; }
-.adopt-src { font-size: 11px; color: rgba(74,222,128,0.35); }
-.adopt-right { flex: 1; min-height: 0; height: 100%; }
+  /* CHART CONTAINERS */
+  .chart-wrap {
+    background: var(--bg-card);
+    border: 1px solid rgba(74,222,128,0.12);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  .chart-wrap h3 {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-dim);
+    font-weight: 500;
+  }
+  .chart-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  @media (max-width: 700px) { .chart-row { grid-template-columns: 1fr; } }
 
-/* ── SLIDE 6: RISK ── */
-#s6 { background: var(--bg); }
-.risk-hd { padding: 30px 56px 16px; }
-.risk-ht { font-size: clamp(20px,2.6vw,32px); font-weight: 600; }
-.risk-hs { font-size: 13px; font-style: italic; color: var(--green); margin-top: 4px; }
-.risk-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; flex: 1; }
-.risk-card { padding: 36px 48px; display: flex; flex-direction: column; gap: 10px; }
-.risk-card.dk { background: var(--bg); }
-.risk-card.lt { background: var(--card-light); }
-.rk-num { font-size: 13px; font-weight: 700; letter-spacing: 1px; }
-.risk-card.dk .rk-num { color: var(--green); }
-.risk-card.lt .rk-num { color: #166534; }
-.rk-title { font-size: clamp(18px,2.2vw,26px); font-weight: 700; }
-.risk-card.dk .rk-title { color: var(--green); }
-.risk-card.lt .rk-title { color: #14532d; }
-.rk-body { font-size: 13px; line-height: 1.5; }
-.risk-card.dk .rk-body { color: var(--dim); }
-.risk-card.lt .rk-body { color: #4a7c59; }
-.rk-stat { font-size: 13px; font-weight: 600; }
-.risk-card.dk .rk-stat { color: var(--cyan); }
-.risk-card.lt .rk-stat { color: #166534; }
+  /* INDUSTRY GRID */
+  .industry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .industry-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(74,222,128,0.12);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+  }
+  .industry-card:hover {
+    border-color: rgba(103,232,249,0.4);
+    transform: translateY(-4px);
+  }
+  .industry-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+  .industry-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .industry-card p { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+  .industry-stat { font-size: 0.85rem; font-weight: 700; color: var(--cyan); }
 
-/* ── SLIDE 7: TRUST ── */
-#s7 { background: var(--bg); }
-.trust-row { display: flex; gap: 48px; flex: 1; align-items: center; min-height: 0; }
-.trust-l { flex: 0 0 300px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.trust-l-lbl { font-size: 14px; color: var(--dim); align-self: flex-start; }
-.trust-r { flex: 1; display: flex; flex-direction: column; gap: 12px; min-height: 0; }
-.trust-r-lbl { font-size: 14px; color: var(--dim); }
-.legend { display: flex; gap: 14px; flex-wrap: wrap; }
-.leg { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--dim); }
-.leg-dot { width: 9px; height: 9px; border-radius: 50%; }
-.s-foot-italic {
-  font-size: 12px; font-style: italic; color: var(--green);
-  border-top: 1px solid rgba(74,222,128,0.12); padding-top: 14px; margin-top: 14px;
-}
+  /* RISK GRID */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .risk-card {
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid transparent;
+    transition: transform 0.3s;
+  }
+  .risk-card:hover { transform: translateY(-4px); }
+  .risk-card.dark { background: var(--bg-card); border-color: rgba(74,222,128,0.15); }
+  .risk-card.light { background: #e8f5e8; color: #1a3a1a; border-color: rgba(74,222,128,0.3); }
+  .risk-card.light .risk-stat { color: #166534; }
+  .risk-card.light p { color: #3a5a3a; }
+  .risk-num { font-size: 1.6rem; font-weight: 800; color: var(--green); margin-bottom: 0.25rem; }
+  .risk-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .risk-card p { font-size: 0.82rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+  .risk-stat { font-size: 0.82rem; font-weight: 700; color: var(--green-dim); }
 
-/* ── SLIDE 8: TIMELINE ── */
-#s8 { background: var(--bg); }
-.tl-outer { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 20px; }
-.tl-grid { display: grid; grid-template-columns: repeat(5,1fr); }
-/* top row — content for items 1,3,5 */
-.tl-top { display: grid; grid-template-columns: repeat(5,1fr); }
-.tl-bot { display: grid; grid-template-columns: repeat(5,1fr); }
-.tl-cell { padding: 0 8px 16px; text-align: center; }
-.tl-cell.lo { padding: 16px 8px 0; }
-.tl-cell.empty { visibility: hidden; }
-.tl-year { font-size: clamp(24px,2.8vw,38px); font-weight: 800; margin-bottom: 5px; }
-.tl-year.g { color: var(--green); }
-.tl-year.c { color: var(--cyan); }
-.tl-ev { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 4px; line-height: 1.3; }
-.tl-desc { font-size: 11px; color: var(--dim); line-height: 1.4; }
-.tl-line-row {
-  position: relative; height: 28px;
-  display: flex; align-items: center;
-}
-.tl-bar {
-  position: absolute; left: 0; right: 0; height: 2px;
-  background: linear-gradient(to right, var(--green), var(--cyan));
-}
-.tl-dots { display: grid; grid-template-columns: repeat(5,1fr); position: relative; z-index: 2; height: 100%; }
-.tl-dot-cell { display: flex; align-items: center; justify-content: center; }
-.tl-dot-circle {
-  width: 13px; height: 13px; border-radius: 50%; border: 2px solid;
-}
-.tl-dot-circle.g { background: var(--green); border-color: var(--green); }
-.tl-dot-circle.c { background: var(--cyan); border-color: var(--cyan); }
-.tl-src { font-size: 11px; color: rgba(74,222,128,0.3); text-align: center; margin-top: 12px; }
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding: 2rem 0;
+  }
+  .timeline-line {
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green), var(--cyan));
+    transform: translateY(-50%);
+  }
+  .timeline-items {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+  .timeline-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .timeline-item:nth-child(odd) { flex-direction: column-reverse; padding-bottom: 3rem; }
+  .timeline-item:nth-child(even) { padding-top: 3rem; }
+  .timeline-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 3px solid var(--bg-dark);
+    transition: transform 0.2s, background 0.2s;
+    flex-shrink: 0;
+  }
+  .timeline-item:hover .timeline-dot {
+    transform: scale(1.6);
+    background: var(--cyan);
+  }
+  .timeline-year { font-size: 1.4rem; font-weight: 800; color: var(--green); }
+  .timeline-item:nth-child(even) .timeline-year { color: var(--cyan); }
+  .timeline-title { font-size: 0.8rem; font-weight: 600; text-align: center; max-width: 100px; }
+  .timeline-desc { font-size: 0.72rem; color: var(--text-dim); text-align: center; max-width: 110px; }
+  @media (max-width: 600px) {
+    .timeline-line { display: none; }
+    .timeline-items { flex-direction: column; gap: 1.5rem; }
+    .timeline-item,
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+      flex-direction: row;
+      padding: 0;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .timeline-title, .timeline-desc { max-width: none; text-align: left; }
+  }
 
-/* ── SLIDE 9: SCENARIOS ── */
-#s9 { flex-direction: column; }
-.s9-hd {
-  background: var(--bg); padding: 26px 56px 14px;
-  display: flex; justify-content: space-between; align-items: center;
-  border-bottom: 1px solid rgba(74,222,128,0.1);
-}
-.s9-title { font-size: clamp(20px,2.5vw,30px); font-weight: 600; }
-.s9-sub { font-size: 13px; font-style: italic; color: var(--green); }
-.scen-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; flex: 1; }
-.scen { padding: 36px 40px; display: flex; flex-direction: column; gap: 12px; }
-.scen.a { background: #4ade80; }
-.scen.b { background: var(--bg); border-left: 1px solid rgba(74,222,128,0.15); border-right: 1px solid rgba(74,222,128,0.15); }
-.scen.c { background: var(--card-light); }
-.scen-lbl { font-size: 10px; letter-spacing: 2px; font-weight: 700; }
-.scen.a .scen-lbl { color: #14532d; }
-.scen.b .scen-lbl { color: var(--green); }
-.scen.c .scen-lbl { color: #4a7c59; }
-.scen-name { font-size: clamp(26px,3.5vw,44px); font-weight: 800; line-height: 1; }
-.scen.a .scen-name { color: #14532d; }
-.scen.b .scen-name { color: var(--white); }
-.scen.c .scen-name { color: #14532d; }
-.scen-badge {
-  display: inline-block; padding: 3px 10px; border-radius: 4px;
-  font-size: 12px; font-weight: 600; width: fit-content;
-}
-.scen.a .scen-badge, .scen.b .scen-badge { background: #166534; color: #86efac; }
-.scen.c .scen-badge { background: #374151; color: #9ca3af; }
-.scen-body { font-size: 13px; line-height: 1.5; }
-.scen.a .scen-body { color: #14532d; }
-.scen.b .scen-body { color: var(--dim); }
-.scen.c .scen-body { color: #4a7c59; }
-.scen-ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-.scen-ul li { font-size: 13px; line-height: 1.4; }
-.scen-ul li::before { content: '· '; }
-.scen.a .scen-ul li { color: #14532d; }
-.scen.b .scen-ul li { color: var(--dim); }
-.scen.c .scen-ul li { color: #4a7c59; }
-.scen-hl { font-size: 16px; font-weight: 700; margin-top: auto; }
-.scen.a .scen-hl { color: #14532d; }
-.scen.b .scen-hl { color: var(--green); }
-.scen.c .scen-hl { color: #b91c1c; }
-.scen-tag {
-  display: inline-block; background: var(--green); color: #14532d;
-  font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 4px; width: fit-content;
-}
+  /* SCENARIOS */
+  .scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .scenario-card {
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.3s;
+  }
+  .scenario-card:hover { transform: translateY(-6px); }
+  .scenario-card.accel { background: #16a34a; color: #fff; }
+  .scenario-card.equil { background: var(--bg-card2); border: 2px solid var(--green); }
+  .scenario-card.fric { background: #f0fdf4; color: #1a3a1a; }
+  .scenario-card.fric p, .scenario-card.fric li { color: #3a5a3a; }
+  .scenario-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .accel .scenario-badge { background: rgba(255,255,255,0.25); color: #fff; }
+  .equil .scenario-badge { background: var(--green); color: #000; }
+  .fric .scenario-badge { background: #dcfce7; color: #166534; }
+  .scenario-card h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.75rem; }
+  .scenario-card p { font-size: 0.85rem; margin-bottom: 1rem; opacity: 0.9; }
+  .scenario-card ul { list-style: none; font-size: 0.82rem; display: flex; flex-direction: column; gap: 0.3rem; }
+  .scenario-card ul li::before { content: "· "; }
+  .scenario-highlight {
+    font-size: 1rem;
+    font-weight: 800;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+  .fric .scenario-highlight { color: #dc2626; border-top-color: rgba(0,0,0,0.1); }
+  .equil .scenario-highlight { color: var(--green); }
 
-/* ── SLIDE 10: CLOSING ── */
-#s10 { background: var(--bg); align-items: center; justify-content: center; }
-.close-box {
-  border: 2px solid var(--green); padding: 72px 88px;
-  text-align: center; max-width: 780px;
-}
-.close-lbl { font-size: 10px; letter-spacing: 5px; color: var(--green); font-weight: 700; margin-bottom: 36px; }
-.close-q { font-size: clamp(20px,3vw,36px); font-weight: 400; line-height: 1.45; margin-bottom: 32px; }
-.close-bar { width: 44px; height: 3px; background: var(--green-mid); margin: 0 auto 28px; }
-.close-tl { font-size: 14px; color: var(--green); letter-spacing: 1px; }
-.close-tl span { margin: 0 12px; opacity: 0.4; }
-.close-meta { font-size: 11px; color: var(--dim); margin-top: 20px; }
+  /* CLOSING */
+  #closing {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    border-top: 1px solid rgba(74,222,128,0.1);
+  }
+  .closing-inner { max-width: 700px; }
+  .closing-inner h2 { font-size: clamp(1.6rem, 4vw, 2.8rem); margin-bottom: 1.5rem; }
+  .closing-inner h2 span { color: var(--green); }
+  .closing-tags { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
+  .closing-tags span {
+    font-size: 0.8rem;
+    color: var(--green);
+    border: 1px solid rgba(74,222,128,0.3);
+    padding: 0.35rem 1rem;
+    border-radius: 999px;
+  }
 
-/* ── PROGRESS BAR ── */
-.progress {
-  position: fixed; top: 0; left: 0; height: 3px;
-  background: var(--green-mid); transition: width 0.4s ease; z-index: 300;
-}
+  /* FADE-IN ON SCROLL */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
 
-/* ── KEYBOARD HINT ── */
-.hint {
-  position: fixed; top: 16px; right: 20px; font-size: 11px; color: rgba(74,222,128,0.3); z-index: 200;
-}
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: var(--green);
+    border-radius: 2px;
+    margin: 1rem 0 2rem;
+  }
 </style>
 </head>
 <body>
 
-<div class="progress" id="progress"></div>
-<div class="hint">← → or click to navigate</div>
+<nav>
+  <span class="logo">AI Report · 2025</span>
+  <ul>
+    <li><a href="#market">Market</a></li>
+    <li><a href="#adoption">Adoption</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#risk">Risk</a></li>
+    <li><a href="#outlook">Outlook</a></li>
+    <li><a href="#scenarios">Scenarios</a></li>
+  </ul>
+</nav>
 
-<div class="deck" id="deck">
-
-<!-- ════ SLIDE 1: TITLE ════ -->
-<div class="slide active" id="s1">
-  <div class="s1-left">
-    <div class="s1-eyebrow">REPORT · 2025</div>
-    <h1 class="s1-h">The Future of<br>Artificial<br>Intelligence</h1>
-    <div class="s1-bar"></div>
-    <p class="s1-sub">From breakthrough models to societal infrastructure</p>
-    <p class="s1-meta">Strategic Outlook · 10-Slide Briefing</p>
-  </div>
-  <div class="s1-right">
-    <canvas id="neural"></canvas>
-  </div>
-</div>
-
-<!-- ════ SLIDE 2: NUMBERS ════ -->
-<div class="slide" id="s2">
-  <div class="s-pad" style="display:flex;flex-direction:column;height:100%;">
-    <div class="s-hd">
-      <h2 class="s-title">AI by the Numbers</h2>
-      <div class="s-tag">01 / MARKET PULSE</div>
-    </div>
-    <div class="nums-row">
-      <div class="big-num-block">
-        <div class="big-num" data-count="1.81" data-prefix="$" data-suffix="T" data-dec="2">$0T</div>
-        <div class="big-lbl">Projected global AI market value by 2030</div>
-        <div class="big-sub">Up from $235B in 2024 — a 36% CAGR</div>
-      </div>
-      <div class="stat-grid">
-        <div class="stat-card">
-          <div class="stat-n g" data-count="77" data-suffix="%" data-dec="0">0%</div>
-          <div class="stat-l">of devices already use some form of AI</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-n" data-count="97" data-suffix="M" data-dec="0">0M</div>
-          <div class="stat-l">AI-related jobs expected globally by 2025 (WEF)</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-n g" data-count="4.4" data-suffix="x" data-dec="1">0x</div>
-          <div class="stat-l">productivity lift among generative-AI users (McKinsey, 2024)</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-n" data-count="83" data-suffix="%" data-dec="0">0%</div>
-          <div class="stat-l">of companies cite AI as a top strategic priority</div>
-        </div>
-      </div>
-    </div>
-    <div class="s-foot">AI is no longer emerging — it is the fastest-scaling general-purpose technology in modern history.</div>
-  </div>
-</div>
-
-<!-- ════ SLIDE 3: COMPUTE ════ -->
-<div class="slide" id="s3">
-  <div class="s-pad" style="display:flex;flex-direction:column;height:100%;">
-    <div class="s-hd">
-      <div>
-        <h2 class="s-title">Compute Doubling Every ~6 Months</h2>
-        <p style="font-size:12px;color:var(--dim);margin-top:5px;">Frontier model training FLOPs have grown ~10⁹× since 2012</p>
-      </div>
-    </div>
-    <div class="chart-row">
-      <div class="chart-box"><canvas id="compute-chart"></canvas></div>
-      <div class="chart-stats">
-        <div><div class="cs-val">6 mo</div><div class="cs-lbl">Effective doubling time of frontier compute</div></div>
-        <div><div class="cs-val" style="color:var(--cyan)">$100M+</div><div class="cs-lbl">Cost to train a flagship 2024 model</div></div>
-        <div><div class="cs-val">1 GW</div><div class="cs-lbl">Power envelope of next-gen AI data centers</div></div>
-      </div>
+<div id="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <span class="hero-tag">Strategic Briefing · 2025</span>
+    <h1>The Future of <span>Artificial Intelligence</span></h1>
+    <p>From breakthrough models to societal infrastructure — a data-driven outlook on where AI is headed.</p>
+    <div class="scroll-hint">
+      <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      SCROLL TO EXPLORE
     </div>
   </div>
 </div>
 
-<!-- ════ SLIDE 4: INDUSTRIES ════ -->
-<div class="slide" id="s4">
-  <div class="s-pad" style="display:flex;flex-direction:column;height:100%;">
-    <div class="s-hd">
-      <h2 class="s-title">Where AI Is Already Working</h2>
-      <div style="font-size:13px;color:var(--dim);font-style:italic;">Six industries, six measurable shifts</div>
-    </div>
-    <div class="ind-grid">
-      <div class="ind-card"><div class="ind-icon">🏥</div><div class="ind-name">Healthcare</div><div class="ind-sub">Diagnostic imaging &amp; drug discovery</div><div class="ind-metric">94% accuracy in early cancer detection</div></div>
-      <div class="ind-card"><div class="ind-icon">💰</div><div class="ind-name">Finance</div><div class="ind-sub">Fraud detection &amp; algorithmic trading</div><div class="ind-metric">$10B+ fraud prevented annually</div></div>
-      <div class="ind-card"><div class="ind-icon">🚗</div><div class="ind-name">Mobility</div><div class="ind-sub">Autonomous driving &amp; route optimization</div><div class="ind-metric">40M miles driven autonomously / week</div></div>
-      <div class="ind-card"><div class="ind-icon">🏭</div><div class="ind-name">Manufacturing</div><div class="ind-sub">Predictive maintenance &amp; quality control</div><div class="ind-metric">30% downtime reduction</div></div>
-      <div class="ind-card"><div class="ind-icon">🎓</div><div class="ind-name">Education</div><div class="ind-sub">Personalized tutoring at scale</div><div class="ind-metric">2× learning gains in pilots</div></div>
-      <div class="ind-card"><div class="ind-icon">🌾</div><div class="ind-name">Agriculture</div><div class="ind-sub">Yield prediction &amp; precision irrigation</div><div class="ind-metric">20% water savings</div></div>
-    </div>
+<section id="market">
+  <div class="fade-in">
+    <p class="section-label">01 / Market Pulse</p>
+    <h2>AI by the Numbers</h2>
+    <div class="divider"></div>
+    <p class="lead">AI is no longer emerging — it is the fastest-scaling general-purpose technology in modern history.</p>
   </div>
-</div>
 
-<!-- ════ SLIDE 5: ADOPTION ════ -->
-<div class="slide" id="s5">
-  <div class="s-pad" style="display:flex;flex-direction:column;height:100%;">
-    <div class="adopt-wrap" style="flex:1;min-height:0;">
-      <div class="adopt-left">
-        <div class="adopt-tag">02 / ADOPTION</div>
-        <h2 class="adopt-h">The fastest-adopted technology in history.</h2>
-        <p class="adopt-p">ChatGPT reached 100 million users in 2 months — a milestone that took the internet 7 years.</p>
-        <p class="adopt-p">By mid-2024, over 60% of knowledge workers reported using a generative AI tool at least weekly.</p>
-        <p class="adopt-src">Sources: UBS, Reuters, Slack Workforce Index 2024</p>
-      </div>
-      <div class="adopt-right" style="max-height:480px;">
-        <canvas id="adopt-chart"></canvas>
-      </div>
+  <div class="stat-grid">
+    <div class="stat-card fade-in">
+      <div class="stat-num" data-target="1.81" data-suffix="T" data-prefix="$">$0T</div>
+      <div class="stat-label">Projected global AI market by 2030</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="stat-num cyan" data-target="77" data-suffix="%">0%</div>
+      <div class="stat-label">of devices already use some form of AI</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="stat-num" data-target="4.4" data-suffix="x">0x</div>
+      <div class="stat-label">Productivity lift among generative-AI users (McKinsey)</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="stat-num cyan" data-target="97" data-suffix="M">0M</div>
+      <div class="stat-label">AI-related jobs expected globally by 2025 (WEF)</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="stat-num" data-target="83" data-suffix="%">0%</div>
+      <div class="stat-label">of companies cite AI as a top strategic priority</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="stat-num cyan" data-target="36" data-suffix="%">0%</div>
+      <div class="stat-label">Compound annual growth rate (2024–2030)</div>
     </div>
   </div>
-</div>
 
-<!-- ════ SLIDE 6: RISK ════ -->
-<div class="slide" id="s6">
-  <div class="risk-hd">
-    <div class="risk-ht">The Four Frontiers of AI Risk</div>
-    <div class="risk-hs">What we build, we are accountable for.</div>
+  <div class="chart-wrap fade-in">
+    <h3>Training Compute Growth — Frontier Models (log scale) — hover for values</h3>
+    <canvas id="computeChart" height="280"></canvas>
   </div>
-  <div class="risk-grid" style="flex:1;">
-    <div class="risk-card lt">
-      <div class="rk-num">01 · BIAS &amp; FAIRNESS</div>
-      <div class="rk-title">Bias &amp; Fairness</div>
-      <div class="rk-body">Models inherit and amplify the biases in their training data.</div>
-      <div class="rk-stat">35% higher error rate for darker-skinned faces in commercial vision systems (NIST)</div>
-    </div>
-    <div class="risk-card dk">
-      <div class="rk-num">02 · MISINFORMATION</div>
-      <div class="rk-title">Misinformation</div>
-      <div class="rk-body">Generative media erodes the baseline of verifiable truth.</div>
-      <div class="rk-stat">8× growth in detected deepfakes year over year</div>
-    </div>
-    <div class="risk-card dk">
-      <div class="rk-num">03 · JOB DISPLACEMENT</div>
-      <div class="rk-title">Job Displacement</div>
-      <div class="rk-body">Automation will reshape 300M+ roles globally by 2030.</div>
-      <div class="rk-stat">~14% of workers may need full occupation change (OECD)</div>
-    </div>
-    <div class="risk-card lt">
-      <div class="rk-num">04 · SAFETY &amp; ALIGNMENT</div>
-      <div class="rk-title">Safety &amp; Alignment</div>
-      <div class="rk-body">Ensuring frontier systems behave as intended at scale.</div>
-      <div class="rk-stat">50+ governments now signed onto AI safety frameworks</div>
-    </div>
-  </div>
-</div>
+</section>
 
-<!-- ════ SLIDE 7: TRUST ════ -->
-<div class="slide" id="s7">
-  <div class="s-pad" style="display:flex;flex-direction:column;height:100%;">
-    <div class="s-hd">
-      <h2 class="s-title">Capability Is Outpacing Trust</h2>
-      <div style="font-size:12px;color:var(--dim);">Global public sentiment on AI, 2024</div>
-    </div>
-    <div class="trust-row">
-      <div class="trust-l">
-        <div class="trust-l-lbl">Global Trust Sentiment</div>
-        <canvas id="donut" style="max-width:260px;max-height:260px;"></canvas>
-        <div class="legend">
-          <div class="leg"><div class="leg-dot" style="background:#4ade80"></div>Trust AI companies (35%)</div>
-          <div class="leg"><div class="leg-dot" style="background:#38bdf8"></div>Distrust (39%)</div>
-          <div class="leg"><div class="leg-dot" style="background:#6b7280"></div>Unsure (26%)</div>
-        </div>
-      </div>
-      <div class="trust-r">
-        <div class="trust-r-lbl">AI Positivity by Region</div>
-        <canvas id="trust-bar" style="flex:1;max-height:320px;"></canvas>
-      </div>
-    </div>
-    <div class="s-foot-italic">Emerging economies embrace AI; mature markets remain skeptical — governance must bridge both.</div>
+<section id="adoption">
+  <div class="fade-in">
+    <p class="section-label">02 / Adoption</p>
+    <h2>The Fastest-Adopted Technology in History</h2>
+    <div class="divider"></div>
+    <p class="lead">ChatGPT reached 100 million users in 2 months — a milestone that took the internet 7 years.</p>
   </div>
-</div>
+  <div class="chart-wrap fade-in">
+    <h3>Months to reach 100 million users — hover a bar for details</h3>
+    <canvas id="adoptionChart" height="320"></canvas>
+  </div>
+</section>
 
-<!-- ════ SLIDE 8: TIMELINE ════ -->
-<div class="slide" id="s8">
-  <div class="s-pad" style="display:flex;flex-direction:column;height:100%;">
-    <div class="s-hd">
-      <div>
-        <h2 class="s-title">What's Coming, 2025 → 2035</h2>
-        <p style="font-size:12px;color:var(--dim);margin-top:4px;">Consensus forecasts from leading research labs and analysts</p>
-      </div>
+<section id="industries">
+  <div class="fade-in">
+    <p class="section-label">03 / Impact</p>
+    <h2>Where AI Is Already Working</h2>
+    <div class="divider"></div>
+    <p class="lead">Six industries, six measurable shifts.</p>
+  </div>
+  <div class="industry-grid">
+    <div class="industry-card fade-in">
+      <div class="industry-icon">🩺</div>
+      <h3>Healthcare</h3>
+      <p>Diagnostic imaging & drug discovery</p>
+      <div class="industry-stat">94% accuracy in early cancer detection</div>
     </div>
-    <div class="tl-outer">
-      <!-- Top row: items 1, 3, 5 (odd) -->
-      <div class="tl-top">
-        <div class="tl-cell">
-          <div class="tl-year g">2025</div>
-          <div class="tl-ev">AI Agents Go Mainstream</div>
-          <div class="tl-desc">Autonomous agents in 25% of enterprise workflows</div>
-        </div>
-        <div class="tl-cell empty"><div class="tl-year">–</div></div>
-        <div class="tl-cell">
-          <div class="tl-year g">2029</div>
-          <div class="tl-ev">AI-Designed Drugs</div>
-          <div class="tl-desc">First FDA-approved, AI-discovered therapeutics</div>
-        </div>
-        <div class="tl-cell empty"><div class="tl-year">–</div></div>
-        <div class="tl-cell">
-          <div class="tl-year g">2035</div>
-          <div class="tl-ev">AGI Threshold Debate</div>
-          <div class="tl-desc">Frontier systems contest expert performance everywhere</div>
-        </div>
-      </div>
-      <!-- Line + dots -->
-      <div class="tl-line-row">
-        <div class="tl-bar"></div>
-        <div class="tl-dots">
-          <div class="tl-dot-cell"><div class="tl-dot-circle g"></div></div>
-          <div class="tl-dot-cell"><div class="tl-dot-circle c"></div></div>
-          <div class="tl-dot-cell"><div class="tl-dot-circle g"></div></div>
-          <div class="tl-dot-cell"><div class="tl-dot-circle c"></div></div>
-          <div class="tl-dot-cell"><div class="tl-dot-circle g"></div></div>
-        </div>
-      </div>
-      <!-- Bottom row: items 2, 4 (even) -->
-      <div class="tl-bot">
-        <div class="tl-cell lo empty"><div class="tl-year">–</div></div>
-        <div class="tl-cell lo">
-          <div class="tl-year c">2027</div>
-          <div class="tl-ev">Multimodal Default</div>
-          <div class="tl-desc">Vision + audio + text models surpass humans on knowledge-work benchmarks</div>
-        </div>
-        <div class="tl-cell lo empty"><div class="tl-year">–</div></div>
-        <div class="tl-cell lo">
-          <div class="tl-year c">2032</div>
-          <div class="tl-ev">Embodied AI</div>
-          <div class="tl-desc">Humanoid &amp; service robots ship 5M+ units/year globally</div>
-        </div>
-        <div class="tl-cell lo empty"><div class="tl-year">–</div></div>
-      </div>
-      <div class="tl-src">Composite outlook · Stanford HAI · McKinsey · OpenAI · Anthropic · Gartner (2024)</div>
+    <div class="industry-card fade-in">
+      <div class="industry-icon">💳</div>
+      <h3>Finance</h3>
+      <p>Fraud detection & algorithmic trading</p>
+      <div class="industry-stat">$10B+ fraud prevented annually</div>
+    </div>
+    <div class="industry-card fade-in">
+      <div class="industry-icon">🚗</div>
+      <h3>Mobility</h3>
+      <p>Autonomous driving & route optimization</p>
+      <div class="industry-stat">40M miles driven autonomously / week</div>
+    </div>
+    <div class="industry-card fade-in">
+      <div class="industry-icon">🏭</div>
+      <h3>Manufacturing</h3>
+      <p>Predictive maintenance & quality control</p>
+      <div class="industry-stat">30% downtime reduction</div>
+    </div>
+    <div class="industry-card fade-in">
+      <div class="industry-icon">🎓</div>
+      <h3>Education</h3>
+      <p>Personalized tutoring at scale</p>
+      <div class="industry-stat">2× learning gains in pilots</div>
+    </div>
+    <div class="industry-card fade-in">
+      <div class="industry-icon">🌾</div>
+      <h3>Agriculture</h3>
+      <p>Yield prediction & precision irrigation</p>
+      <div class="industry-stat">20% water savings</div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ════ SLIDE 9: SCENARIOS ════ -->
-<div class="slide" id="s9">
-  <div class="s9-hd">
-    <div class="s9-title">Three Scenarios for 2035</div>
-    <div class="s9-sub">Which world are we building?</div>
+<section id="risk">
+  <div class="fade-in">
+    <p class="section-label">04 / Risk</p>
+    <h2>The Four Frontiers of AI Risk</h2>
+    <div class="divider"></div>
+    <p class="lead">What we build, we are accountable for.</p>
   </div>
-  <div class="scen-grid" style="flex:1;">
-    <div class="scen a">
-      <div class="scen-lbl">SCENARIO A</div>
-      <div class="scen-name">Acceleration</div>
-      <div class="scen-badge">≈ 25% likely</div>
-      <p class="scen-body">Open models + cheap compute compound. AI becomes a utility layer beneath every product.</p>
-      <ul class="scen-ul">
+  <div class="risk-grid">
+    <div class="risk-card dark fade-in">
+      <div class="risk-num">01</div>
+      <h3>Bias & Fairness</h3>
+      <p>Models inherit and amplify the biases in their training data.</p>
+      <div class="risk-stat">35% higher error rate for darker-skinned faces (NIST)</div>
+    </div>
+    <div class="risk-card light fade-in">
+      <div class="risk-num" style="color:#166534">02</div>
+      <h3>Misinformation</h3>
+      <p>Generative media erodes the baseline of verifiable truth.</p>
+      <div class="risk-stat">8× growth in detected deepfakes year over year</div>
+    </div>
+    <div class="risk-card dark fade-in">
+      <div class="risk-num">03</div>
+      <h3>Job Displacement</h3>
+      <p>Automation will reshape 300M+ roles globally by 2030.</p>
+      <div class="risk-stat">~14% of workers may need full occupation change (OECD)</div>
+    </div>
+    <div class="risk-card light fade-in">
+      <div class="risk-num" style="color:#166534">04</div>
+      <h3>Safety & Alignment</h3>
+      <p>Ensuring frontier systems behave as intended at scale.</p>
+      <div class="risk-stat">50+ governments signed onto AI safety frameworks</div>
+    </div>
+  </div>
+  <div class="chart-row" style="margin-top:2rem">
+    <div class="chart-wrap fade-in">
+      <h3>Global Trust Sentiment — hover to explore</h3>
+      <canvas id="trustChart" height="260"></canvas>
+    </div>
+    <div class="chart-wrap fade-in">
+      <h3>AI Positivity by Region — hover for %</h3>
+      <canvas id="regionalChart" height="260"></canvas>
+    </div>
+  </div>
+</section>
+
+<section id="outlook">
+  <div class="fade-in">
+    <p class="section-label">05 / Outlook</p>
+    <h2>What's Coming, 2025 → 2035</h2>
+    <div class="divider"></div>
+    <p class="lead">Consensus forecasts from Stanford HAI, McKinsey, OpenAI, Anthropic & Gartner.</p>
+  </div>
+  <div class="timeline fade-in">
+    <div class="timeline-line"></div>
+    <div class="timeline-items">
+      <div class="timeline-item">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-title">AI Agents Go Mainstream</div>
+        <div class="timeline-desc">Autonomous agents in 25% of enterprise workflows</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2027</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-title">Multimodal Default</div>
+        <div class="timeline-desc">Vision + audio + text surpass humans on knowledge-work benchmarks</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2029</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-title">AI-Designed Drugs</div>
+        <div class="timeline-desc">First FDA-approved AI-discovered therapeutics</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2032</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-title">Embodied AI</div>
+        <div class="timeline-desc">Humanoid robots ship 5M+ units/year globally</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2035</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-title">AGI Threshold Debate</div>
+        <div class="timeline-desc">Frontier systems contest expert performance everywhere</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="scenarios">
+  <div class="fade-in">
+    <p class="section-label">06 / Scenarios</p>
+    <h2>Three Worlds for 2035</h2>
+    <div class="divider"></div>
+    <p class="lead">Which world are we building?</p>
+  </div>
+  <div class="scenario-grid">
+    <div class="scenario-card accel fade-in">
+      <div class="scenario-badge">≈ 25% likely</div>
+      <h3>Acceleration</h3>
+      <p>Open models + cheap compute compound. AI becomes a utility layer beneath every product.</p>
+      <ul>
         <li>+15% global GDP by 2035</li>
-        <li>Universal AI tutors &amp; doctors</li>
+        <li>Universal AI tutors & doctors</li>
         <li>Massive labor reallocation</li>
       </ul>
-      <div class="scen-hl">$15T annual value creation</div>
+      <div class="scenario-highlight">$15T annual value creation</div>
     </div>
-    <div class="scen b">
-      <div class="scen-lbl">SCENARIO B</div>
-      <div class="scen-name">Equilibrium</div>
-      <div class="scen-badge">≈ 55% likely</div>
-      <p class="scen-body">Regulation, capability, and trust scale together. Steady but uneven diffusion across sectors.</p>
-      <ul class="scen-ul">
+    <div class="scenario-card equil fade-in">
+      <div class="scenario-badge">≈ 55% likely · Most likely</div>
+      <h3>Equilibrium</h3>
+      <p>Regulation, capability, and trust scale together. Steady but uneven diffusion across sectors.</p>
+      <ul>
         <li>AI co-pilots standard at work</li>
-        <li>Strong EU/US/Asia governance regimes</li>
+        <li>Strong EU/US/Asia governance</li>
         <li>Productivity +1.5% / yr</li>
       </ul>
-      <div class="scen-tag">Most likely path</div>
+      <div class="scenario-highlight">Most likely path</div>
     </div>
-    <div class="scen c">
-      <div class="scen-lbl">SCENARIO C</div>
-      <div class="scen-name">Friction</div>
-      <div class="scen-badge">≈ 20% likely</div>
-      <p class="scen-body">Safety incidents, compute bottlenecks, or geopolitics fragment global AI development.</p>
-      <ul class="scen-ul">
+    <div class="scenario-card fric fade-in">
+      <div class="scenario-badge">≈ 20% likely</div>
+      <h3>Friction</h3>
+      <p>Safety incidents, compute bottlenecks, or geopolitics fragment global AI development.</p>
+      <ul>
         <li>Splintered model ecosystems</li>
         <li>Trust collapse in synthetic media</li>
         <li>Innovation drag in regulated sectors</li>
       </ul>
-      <div class="scen-hl">−$3T opportunity cost</div>
+      <div class="scenario-highlight">−$3T opportunity cost</div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ════ SLIDE 10: CLOSING ════ -->
-<div class="slide" id="s10">
-  <div class="close-box">
-    <div class="close-lbl">C L O S I N G</div>
-    <div class="close-q">AI will not replace humanity — it will reveal what we choose to build with it.</div>
-    <div class="close-bar"></div>
-    <div class="close-tl">Build deliberately.<span>·</span>Govern openly.<span>·</span>Deploy responsibly.</div>
-    <div class="close-meta">The Future of Artificial Intelligence · 2025 Briefing</div>
+<div id="closing">
+  <div class="closing-inner fade-in">
+    <h2>AI will not replace humanity — it will <span>reveal what we choose to build</span> with it.</h2>
+    <div class="closing-tags">
+      <span>Build deliberately</span>
+      <span>Govern openly</span>
+      <span>Deploy responsibly</span>
+    </div>
+    <p style="margin-top:2rem; color:var(--text-dim); font-size:0.8rem">The Future of Artificial Intelligence · 2025 Briefing</p>
   </div>
-</div>
-
-</div><!-- /deck -->
-
-<!-- Navigation -->
-<div class="nav">
-  <button class="nav-btn" id="btn-prev">←</button>
-  <div class="dots" id="dots"></div>
-  <div class="counter" id="ctr">1 / 10</div>
-  <button class="nav-btn" id="btn-next">→</button>
 </div>
 
 <script>
-// ─────────────────────────────────────────────
-// STATE
-// ─────────────────────────────────────────────
-const slides = Array.from(document.querySelectorAll('.slide'));
-const N = slides.length;
-let cur = 0;
-const done = new Set();
+// NEURAL NET CANVAS
+const canvas = document.getElementById('heroCanvas');
+const ctx = canvas.getContext('2d');
+let nodes = [];
 
-// ─────────────────────────────────────────────
-// NAVIGATION
-// ─────────────────────────────────────────────
-const dotsEl = document.getElementById('dots');
-const ctrEl  = document.getElementById('ctr');
-const progress = document.getElementById('progress');
-
-for (let i = 0; i < N; i++) {
-  const d = document.createElement('div');
-  d.className = 'dot' + (i === 0 ? ' on' : '');
-  d.onclick = () => goTo(i);
-  dotsEl.appendChild(d);
+function resize() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
 }
+resize();
+window.addEventListener('resize', resize);
 
-function goTo(n) {
-  n = Math.max(0, Math.min(n, N - 1));
-  slides[cur].classList.remove('active');
-  cur = n;
-  slides[cur].classList.add('active');
-  dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('on', i === cur));
-  ctrEl.textContent = `${cur + 1} / ${N}`;
-  progress.style.width = `${(cur / (N - 1)) * 100}%`;
-  document.getElementById('btn-prev').disabled = cur === 0;
-  document.getElementById('btn-next').disabled = cur === N - 1;
-  boot(cur);
-}
-
-document.getElementById('btn-prev').onclick = () => goTo(cur - 1);
-document.getElementById('btn-next').onclick = () => goTo(cur + 1);
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); goTo(cur + 1); }
-  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                    { e.preventDefault(); goTo(cur - 1); }
-});
-
-// Touch / swipe
-let tx = 0;
-document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
-document.addEventListener('touchend',   e => {
-  const dx = e.changedTouches[0].clientX - tx;
-  if (Math.abs(dx) > 40) goTo(dx < 0 ? cur + 1 : cur - 1);
-}, { passive: true });
-
-// ─────────────────────────────────────────────
-// NEURAL NETWORK ANIMATION (slide 1)
-// ─────────────────────────────────────────────
-function initNeural() {
-  const canvas = document.getElementById('neural');
-  const ctx = canvas.getContext('2d');
-  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
-  resize();
-  window.addEventListener('resize', resize);
-
-  const nodes = Array.from({ length: 42 }, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    vx: (Math.random() - 0.5) * 0.45,
-    vy: (Math.random() - 0.5) * 0.45,
-    r: Math.random() * 3.5 + 2.5,
-    p: Math.random() * Math.PI * 2
-  }));
-
-  function frame() {
-    canvas.width = canvas.offsetWidth; // keeps crisp on resize
-    canvas.height = canvas.offsetHeight;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    const gr = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, canvas.width);
-    gr.addColorStop(0, '#0e2a0e'); gr.addColorStop(1, '#071307');
-    ctx.fillStyle = gr; ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    nodes.forEach(n => {
-      n.x += n.vx; n.y += n.vy; n.p += 0.018;
-      if (n.x < 0 || n.x > canvas.width)  n.vx *= -1;
-      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
-    });
-
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const d = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
-        if (d < 150) {
-          ctx.beginPath();
-          ctx.moveTo(nodes[i].x, nodes[i].y);
-          ctx.lineTo(nodes[j].x, nodes[j].y);
-          ctx.strokeStyle = `rgba(74,222,128,${(1 - d/150) * 0.32})`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
-        }
-      }
-    }
-
-    nodes.forEach(n => {
-      const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 3.5);
-      g.addColorStop(0, 'rgba(74,222,128,0.75)');
-      g.addColorStop(1, 'rgba(74,222,128,0)');
-      ctx.beginPath(); ctx.arc(n.x, n.y, n.r * 3.5, 0, Math.PI*2);
-      ctx.fillStyle = g; ctx.fill();
-      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(74,222,128,${0.65 + 0.3 * Math.sin(n.p)})`;
-      ctx.fill();
-    });
-
-    requestAnimationFrame(frame);
-  }
-  frame();
-}
-
-// ─────────────────────────────────────────────
-// ANIMATED COUNTERS
-// ─────────────────────────────────────────────
-function animateCounters(el) {
-  el.querySelectorAll('[data-count]').forEach(node => {
-    if (node._counted) return; node._counted = true;
-    const target = parseFloat(node.dataset.count);
-    const pre    = node.dataset.prefix || '';
-    const suf    = node.dataset.suffix || '';
-    const dec    = parseInt(node.dataset.dec) || 0;
-    const dur    = 1400;
-    const t0     = performance.now();
-    const tick   = t => {
-      const p = Math.min((t - t0) / dur, 1);
-      const e = 1 - Math.pow(1 - p, 3); // ease out cubic
-      node.textContent = pre + (target * e).toFixed(dec) + suf;
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
+for (let i = 0; i < 60; i++) {
+  nodes.push({
+    x: Math.random(), y: Math.random(),
+    vx: (Math.random()-0.5)*0.0003,
+    vy: (Math.random()-0.5)*0.0003,
+    r: Math.random()*3+1.5
   });
 }
 
-// ─────────────────────────────────────────────
-// CHARTS
-// ─────────────────────────────────────────────
-const chartDefaults = {
-  color: '#7aad7a',
-  borderColor: 'rgba(74,222,128,0.12)',
-  tooltip: {
-    backgroundColor: 'rgba(5,20,5,0.92)',
-    titleColor: '#4ade80',
-    bodyColor: '#e8f5e8',
-    borderColor: 'rgba(74,222,128,0.3)',
-    borderWidth: 1,
+function drawNet() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const W=canvas.width, H=canvas.height;
+  nodes.forEach(n => {
+    n.x+=n.vx; n.y+=n.vy;
+    if(n.x<0||n.x>1) n.vx*=-1;
+    if(n.y<0||n.y>1) n.vy*=-1;
+  });
+  for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++){
+    const a=nodes[i],b=nodes[j];
+    const dx=(a.x-b.x)*W, dy=(a.y-b.y)*H;
+    const d=Math.sqrt(dx*dx+dy*dy);
+    if(d<160){
+      ctx.strokeStyle=`rgba(74,222,128,${0.4*(1-d/160)})`;
+      ctx.lineWidth=0.8;
+      ctx.beginPath(); ctx.moveTo(a.x*W,a.y*H); ctx.lineTo(b.x*W,b.y*H); ctx.stroke();
+    }
   }
+  nodes.forEach(n=>{
+    ctx.beginPath(); ctx.arc(n.x*W,n.y*H,n.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(74,222,128,0.8)'; ctx.fill();
+  });
+  requestAnimationFrame(drawNet);
+}
+drawNet();
+
+// SCROLL FADE + COUNTERS
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('[data-target]').forEach(animateCounter);
+    }
+  });
+}, {threshold:0.15});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+function animateCounter(el) {
+  if(el.dataset.animated) return;
+  el.dataset.animated='1';
+  const target=parseFloat(el.dataset.target);
+  const suffix=el.dataset.suffix||'';
+  const prefix=el.dataset.prefix||'';
+  const isDecimal=target%1!==0;
+  const start=performance.now();
+  function step(now){
+    const p=Math.min((now-start)/1400,1);
+    const eased=1-Math.pow(1-p,3);
+    const val=eased*target;
+    el.textContent=prefix+(isDecimal?val.toFixed(2):Math.round(val))+suffix;
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+const tooltipDefaults = {
+  backgroundColor:'#0f2310',
+  borderColor:'#4ade80',
+  borderWidth:1,
+  titleColor:'#4ade80',
+  bodyColor:'#e2f0e2'
 };
 
-function initComputeChart() {
-  new Chart(document.getElementById('compute-chart'), {
-    type: 'line',
-    data: {
-      labels: ['2012','2014','2016','2018','2020','2022','2024'],
-      datasets: [{
-        label: 'Training Compute (petaFLOP-days)',
-        data: [0.01, 0.1, 2, 50, 1500, 40000, 400000],
-        borderColor: '#4ade80',
-        backgroundColor: 'rgba(74,222,128,0.07)',
-        fill: true, tension: 0.3,
-        pointBackgroundColor: '#38bdf8',
-        pointRadius: 7, pointHoverRadius: 10, borderWidth: 2.5,
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      scales: {
-        y: {
-          type: 'logarithmic',
-          grid: { color: chartDefaults.borderColor },
-          ticks: { color: chartDefaults.color, font: { size: 11 } },
-          title: { display: true, text: 'petaFLOP-days (log scale)', color: chartDefaults.color, font: { size: 10 } }
-        },
-        x: {
-          grid: { color: chartDefaults.borderColor },
-          ticks: { color: chartDefaults.color, font: { size: 11 } },
-          title: { display: true, text: 'Year', color: chartDefaults.color, font: { size: 10 } }
-        }
-      },
-      plugins: {
-        legend: { labels: { color: chartDefaults.color, font: { size: 11 } } },
-        tooltip: chartDefaults.tooltip
-      },
-      animation: { duration: 1200, easing: 'easeOutQuart' }
-    }
-  });
-}
-
-function initAdoptChart() {
-  new Chart(document.getElementById('adopt-chart'), {
-    type: 'bar',
-    data: {
-      labels: ['ChatGPT','TikTok','Instagram','Spotify','Facebook','Internet','Mobile phones'],
-      datasets: [{
-        label: 'Months to 100M users',
-        data: [2, 9, 30, 55, 54, 84, 192],
-        backgroundColor: ['#4ade80','#38bdf8','#38bdf8','#38bdf8','#38bdf8','#38bdf8','#38bdf8'],
-        borderRadius: 4, borderSkipped: false,
-      }]
-    },
-    options: {
-      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-      scales: {
-        x: {
-          grid: { color: chartDefaults.borderColor },
-          ticks: { color: chartDefaults.color, font: { size: 11 } },
-          title: { display: true, text: 'Months to 100M users', color: chartDefaults.color, font: { size: 10 } }
-        },
-        y: {
-          grid: { display: false },
-          ticks: { color: '#e8f5e8', font: { size: 12 } }
-        }
-      },
-      plugins: {
-        legend: { display: false },
-        tooltip: { ...chartDefaults.tooltip, callbacks: { label: c => ` ${c.raw} months` } }
-      },
-      animation: { duration: 1200, easing: 'easeOutQuart' }
-    }
-  });
-}
-
-function initTrustCharts() {
-  // Donut
-  new Chart(document.getElementById('donut'), {
-    type: 'doughnut',
-    data: {
-      labels: ['Trust (35%)','Distrust (39%)','Unsure (26%)'],
-      datasets: [{
-        data: [35, 39, 26],
-        backgroundColor: ['#4ade80','#38bdf8','#6b7280'],
-        borderColor: '#0c1f0c', borderWidth: 3, hoverOffset: 8
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: true, cutout: '66%',
-      plugins: { legend: { display: false }, tooltip: chartDefaults.tooltip },
-      animation: { duration: 1100, animateRotate: true }
-    },
-    plugins: [{
-      id: 'ct',
-      afterDraw(chart) {
-        const { ctx, chartArea: { left, top, right, bottom } } = chart;
-        const cx = (left+right)/2, cy = (top+bottom)/2;
-        ctx.save();
-        ctx.font = 'bold 13px Inter,sans-serif'; ctx.fillStyle = '#e8f5e8'; ctx.textAlign = 'center';
-        ctx.fillText('Only 35%', cx, cy - 7);
-        ctx.font = '11px Inter,sans-serif'; ctx.fillStyle = '#7aad7a';
-        ctx.fillText('express trust', cx, cy + 10);
-        ctx.restore();
-      }
+// COMPUTE CHART
+new Chart(document.getElementById('computeChart'),{
+  type:'line',
+  data:{
+    labels:['2012','2014','2016','2018','2020','2022','2024'],
+    datasets:[{
+      label:'Training Compute (petaFLOP-days)',
+      data:[0.01,0.10,2.3,40,1500,45000,380000],
+      borderColor:'#4ade80',
+      backgroundColor:'rgba(74,222,128,0.08)',
+      borderWidth:2.5,
+      pointBackgroundColor:'#67e8f9',
+      pointRadius:6, pointHoverRadius:9,
+      fill:true, tension:0.4
     }]
-  });
-
-  // Bar
-  new Chart(document.getElementById('trust-bar'), {
-    type: 'bar',
-    data: {
-      labels: ['China','India','Brazil','Germany','UK','USA'],
-      datasets: [{
-        label: '% Positive',
-        data: [78, 76, 57, 37, 38, 39],
-        backgroundColor: ['#4ade80','#4ade80','#4ade80','#38bdf8','#38bdf8','#38bdf8'],
-        borderRadius: 4, borderSkipped: false,
-      }]
+  },
+  options:{
+    responsive:true,
+    interaction:{mode:'index',intersect:false},
+    plugins:{
+      legend:{labels:{color:'#7aab7a',font:{size:12}}},
+      tooltip:{...tooltipDefaults, callbacks:{label:c=>` ${c.raw.toLocaleString()} petaFLOP-days`}}
     },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      scales: {
-        y: {
-          min: 0, max: 100,
-          grid: { color: chartDefaults.borderColor },
-          ticks: { color: chartDefaults.color, font: { size: 11 } },
-          title: { display: true, text: '% Positive', color: chartDefaults.color, font: { size: 10 } }
-        },
-        x: { grid: { display: false }, ticks: { color: '#e8f5e8', font: { size: 12 } } }
-      },
-      plugins: {
-        legend: { display: false },
-        tooltip: { ...chartDefaults.tooltip, callbacks: { label: c => ` ${c.raw}% positive` } }
-      },
-      animation: { duration: 1200, easing: 'easeOutQuart' }
+    scales:{
+      x:{ticks:{color:'#7aab7a'},grid:{color:'rgba(74,222,128,0.06)'}},
+      y:{type:'logarithmic',ticks:{color:'#7aab7a',callback:v=>v>=1000?(v/1000)+'K':v},grid:{color:'rgba(74,222,128,0.06)'}}
     }
-  });
-}
+  }
+});
 
-// ─────────────────────────────────────────────
-// BOOT — called when a slide becomes active
-// ─────────────────────────────────────────────
-function boot(i) {
-  if (done.has(i)) return;
-  done.add(i);
-  if (i === 0) initNeural();
-  if (i === 1) animateCounters(slides[1]);
-  if (i === 2) initComputeChart();
-  if (i === 4) initAdoptChart();
-  if (i === 6) initTrustCharts();
-}
+// ADOPTION CHART
+new Chart(document.getElementById('adoptionChart'),{
+  type:'bar',
+  data:{
+    labels:['ChatGPT','TikTok','Instagram','Facebook','Spotify','Internet','Mobile phones'],
+    datasets:[{
+      label:'Months to 100M users',
+      data:[2,9,30,54,55,84,192],
+      backgroundColor:['#4ade80','#67e8f9','#67e8f9','#67e8f9','#67e8f9','#67e8f9','#67e8f9'],
+      borderRadius:6,
+      hoverBackgroundColor:'#facc15'
+    }]
+  },
+  options:{
+    indexAxis:'y', responsive:true,
+    interaction:{mode:'index',intersect:false},
+    plugins:{
+      legend:{display:false},
+      tooltip:{...tooltipDefaults, callbacks:{label:c=>` ${c.raw} months`}}
+    },
+    scales:{
+      x:{ticks:{color:'#7aab7a'},grid:{color:'rgba(74,222,128,0.06)'}},
+      y:{ticks:{color:'#e2f0e2'},grid:{display:false}}
+    }
+  }
+});
 
-// Init
-goTo(0);
+// TRUST DONUT
+new Chart(document.getElementById('trustChart'),{
+  type:'doughnut',
+  data:{
+    labels:['Trust AI companies (35%)','Distrust (39%)','Unsure (26%)'],
+    datasets:[{
+      data:[35,39,26],
+      backgroundColor:['#4ade80','#67e8f9','#4b5563'],
+      hoverBackgroundColor:['#86efac','#a5f3fc','#6b7280'],
+      borderWidth:0, hoverOffset:10
+    }]
+  },
+  options:{
+    cutout:'60%',
+    plugins:{
+      legend:{position:'bottom',labels:{color:'#7aab7a',font:{size:11},padding:12}},
+      tooltip:{...tooltipDefaults}
+    }
+  }
+});
+
+// REGIONAL CHART
+new Chart(document.getElementById('regionalChart'),{
+  type:'bar',
+  data:{
+    labels:['China','India','Brazil','Germany','UK','USA'],
+    datasets:[{
+      label:'% Positive on AI',
+      data:[78,76,57,37,38,39],
+      backgroundColor:['#4ade80','#4ade80','#4ade80','#67e8f9','#67e8f9','#67e8f9'],
+      borderRadius:6,
+      hoverBackgroundColor:'#facc15'
+    }]
+  },
+  options:{
+    responsive:true,
+    interaction:{mode:'index',intersect:false},
+    plugins:{
+      legend:{display:false},
+      tooltip:{...tooltipDefaults, callbacks:{label:c=>` ${c.raw}% positive`}}
+    },
+    scales:{
+      x:{ticks:{color:'#7aab7a'},grid:{display:false}},
+      y:{ticks:{color:'#7aab7a',callback:v=>v+'%'},grid:{color:'rgba(74,222,128,0.06)'},max:100}
+    }
+  }
+});
 </script>
 </body>
 </html>
