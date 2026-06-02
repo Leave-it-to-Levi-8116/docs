@@ -1,8 +1,7 @@
 name: Deploy AI Presentation to GitHub Pages
 
 # Publishes ai-future-presentation.html as the GitHub Pages site.
-# Self-enables Pages on first run (enablement: true), so no manual
-# Settings toggle is required.
+# Requires Pages source set to "GitHub Actions" in repo Settings > Pages.
 
 on:
   push:
@@ -39,8 +38,6 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
