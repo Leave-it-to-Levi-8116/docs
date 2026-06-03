@@ -6,153 +6,170 @@
 <title>The Future of Artificial Intelligence &mdash; 2025</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --red:    #e63946;
+  --amber:  #ff9f1c;
+  --bg:     #080808;
+  --card:   rgba(14,4,4,0.88);
+  --card2:  rgba(22,8,8,0.92);
+  --text:   #f5eeee;
+  --dim:    #9a8585;
+  --border: rgba(230,57,70,0.18);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family:'Segoe UI',system-ui,sans-serif; line-height:1.6; overflow-x:hidden; }
 
-  :root {
-    --red:      #e63946;
-    --red-dim:  #c1121f;
-    --red-glow: rgba(230,57,70,0.15);
-    --amber:    #ff9f1c;
-    --bg:       #080808;
-    --bg-card:  #130505;
-    --bg-card2: #1c0a0a;
-    --text:     #f5eeee;
-    --text-dim: #9a8585;
-    --border:   rgba(230,57,70,0.15);
-  }
+/* BACKGROUND CANVAS — fixed, covers full page */
+#bgCanvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
 
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; }
+/* everything above the canvas */
+nav, #hero .hero-inner, section, #closing { position:relative; z-index:1; }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(8,8,8,0.92); backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-    height: 56px; padding: 0 2rem;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .nav-logo { font-size: 0.8rem; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
-  nav ul { list-style: none; display: flex; gap: 1.5rem; }
-  nav ul a { color: var(--text-dim); text-decoration: none; font-size: 0.78rem; transition: color 0.2s; }
-  nav ul a:hover { color: var(--red); }
-  @media (max-width: 600px) { nav ul { display: none; } }
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  background:rgba(8,8,8,0.9); backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  height:56px; padding:0 2rem;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.nav-logo { font-size:0.82rem; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:0.06em; }
+nav ul { list-style:none; display:flex; gap:1.5rem; }
+nav ul a { color:var(--dim); text-decoration:none; font-size:0.78rem; transition:color .2s; }
+nav ul a:hover { color:var(--red); }
+@media(max-width:600px){ nav ul { display:none; } }
 
-  /* ── HERO ── */
-  #hero {
-    min-height: 100vh; display: flex; align-items: center;
-    position: relative; overflow: hidden; padding: 80px 2rem 2rem;
-  }
-  #hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.3; }
-  .hero-inner { position: relative; z-index: 2; max-width: 680px; margin: 0 auto; text-align: center; }
-  .pill {
-    display: inline-block; font-size: 0.7rem; letter-spacing: 0.15em;
-    color: var(--red); border: 1px solid var(--red); padding: 0.25rem 0.8rem;
-    border-radius: 999px; margin-bottom: 1.5rem; text-transform: uppercase;
-  }
-  .hero-inner h1 { font-size: clamp(2.4rem, 6vw, 4.8rem); font-weight: 800; line-height: 1.08; margin-bottom: 1rem; }
-  .hero-inner h1 em { font-style: normal; color: var(--red); }
-  .hero-inner .sub { font-size: 1.05rem; color: var(--text-dim); margin-bottom: 2rem; }
-  .scroll-cue { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; color: var(--text-dim); font-size: 0.7rem; letter-spacing: 0.12em; animation: bob 2s infinite; }
-  .scroll-cue svg { width: 18px; height: 18px; stroke: var(--red); fill: none; stroke-width: 2; }
-  @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(7px)} }
+/* HERO */
+#hero { min-height:100vh; display:flex; align-items:center; padding:80px 2rem 2rem; }
+.hero-inner { max-width:680px; margin:0 auto; text-align:center; }
+.pill { display:inline-block; font-size:0.7rem; letter-spacing:.14em; color:var(--red); border:1px solid var(--red); padding:.25rem .8rem; border-radius:999px; margin-bottom:1.4rem; text-transform:uppercase; }
+.hero-inner h1 { font-size:clamp(2.4rem,6vw,4.8rem); font-weight:800; line-height:1.08; margin-bottom:.9rem; }
+.hero-inner h1 em { font-style:normal; color:var(--red); }
+.hero-inner .sub { font-size:1rem; color:var(--dim); margin-bottom:2rem; }
+.scroll-cue { display:flex; flex-direction:column; align-items:center; gap:.3rem; color:var(--dim); font-size:.68rem; letter-spacing:.12em; animation:bob 2s infinite; }
+.scroll-cue svg { width:18px; height:18px; stroke:var(--red); fill:none; stroke-width:2; }
+@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(7px)} }
 
-  /* ── SECTIONS ── */
-  section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
-  .tag { font-size: 0.68rem; letter-spacing: 0.2em; color: var(--red); text-transform: uppercase; margin-bottom: 0.4rem; }
-  h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 0.4rem; }
-  .bar { width: 50px; height: 3px; background: var(--red); border-radius: 2px; margin: 0.8rem 0 1.8rem; }
-  .lead { color: var(--text-dim); font-size: 0.95rem; max-width: 580px; margin-bottom: 2.5rem; }
+/* RIPPLE HINT */
+.ripple-hint { margin-top:2.5rem; font-size:.72rem; color:var(--dim); letter-spacing:.08em; }
+.ripple-hint span { color:var(--red); }
 
-  /* ── STAT CARDS ── */
-  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem; }
-  .stat-card {
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem;
-    transition: border-color 0.25s, transform 0.25s;
-  }
-  .stat-card:hover { border-color: rgba(230,57,70,0.45); transform: translateY(-4px); }
-  .stat-num { font-size: 2.1rem; font-weight: 800; color: var(--red); line-height: 1; margin-bottom: 0.35rem; }
-  .stat-num.amber { color: var(--amber); }
-  .stat-label { font-size: 0.82rem; color: var(--text-dim); }
+/* SECTIONS */
+section { padding:6rem 2rem; max-width:1100px; margin:0 auto; }
+.tag { font-size:.68rem; letter-spacing:.2em; color:var(--red); text-transform:uppercase; margin-bottom:.4rem; }
+h2 { font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; margin-bottom:.4rem; }
+.bar { width:48px; height:3px; background:var(--red); border-radius:2px; margin:.8rem 0 1.6rem; }
+.lead { color:var(--dim); font-size:.95rem; max-width:580px; margin-bottom:2.5rem; }
 
-  /* ── CHART CARDS ── */
-  .chart-card {
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.8rem; margin-bottom: 1.8rem;
-  }
-  .chart-card h3 { font-size: 0.88rem; font-weight: 500; color: var(--text-dim); margin-bottom: 1.2rem; }
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+/* STAT CARDS */
+.stat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1.2rem; margin-bottom:2.5rem; }
+.stat-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1.3rem; transition:border-color .25s, transform .25s, box-shadow .25s; cursor:default; }
+.stat-card:hover { border-color:rgba(230,57,70,.5); transform:translateY(-4px); box-shadow:0 8px 30px rgba(230,57,70,.12); }
+.stat-num { font-size:2.1rem; font-weight:800; color:var(--red); line-height:1; margin-bottom:.3rem; }
+.stat-num.amb { color:var(--amber); }
+.stat-label { font-size:.8rem; color:var(--dim); }
 
-  /* ── INDUSTRY CARDS ── */
-  .industry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.25rem; }
-  .ind-card {
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem;
-    transition: border-color 0.25s, transform 0.25s;
-  }
-  .ind-card:hover { border-color: rgba(255,159,28,0.5); transform: translateY(-4px); }
-  .ind-icon { font-size: 1.7rem; margin-bottom: 0.6rem; }
-  .ind-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem; }
-  .ind-card p { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.4rem; }
-  .ind-stat { font-size: 0.82rem; font-weight: 700; color: var(--amber); }
+/* CHART CARDS */
+.chart-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:1.7rem; margin-bottom:1.7rem; }
+.chart-card h3 { font-size:.85rem; font-weight:500; color:var(--dim); margin-bottom:1.1rem; }
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; }
+@media(max-width:700px){ .two-col { grid-template-columns:1fr; } }
 
-  /* ── RISK CARDS ── */
-  .risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; }
-  .risk-card { border-radius: 12px; padding: 1.4rem; border: 1px solid transparent; transition: transform 0.25s; }
-  .risk-card:hover { transform: translateY(-4px); }
-  .risk-card.dark { background: var(--bg-card); border-color: var(--border); }
-  .risk-card.lite { background: #1e0a0a; border-color: rgba(230,57,70,0.3); }
-  .risk-num { font-size: 1.5rem; font-weight: 800; color: var(--red); margin-bottom: 0.2rem; }
-  .risk-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
-  .risk-card p { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.4rem; }
-  .risk-stat { font-size: 0.8rem; font-weight: 700; color: var(--amber); }
+/* INDUSTRY CARDS — flip on click */
+.industry-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.2rem; }
+.ind-card {
+  height:190px; cursor:pointer;
+  perspective:800px;
+}
+.ind-inner {
+  position:relative; width:100%; height:100%;
+  transform-style:preserve-3d;
+  transition:transform .55s cubic-bezier(.4,0,.2,1);
+  border-radius:12px;
+}
+.ind-card.flipped .ind-inner { transform:rotateY(180deg); }
+.ind-front, .ind-back {
+  position:absolute; inset:0;
+  backface-visibility:hidden;
+  border-radius:12px;
+  padding:1.3rem;
+  border:1px solid var(--border);
+}
+.ind-front { background:var(--card); }
+.ind-back  { background:var(--card2); transform:rotateY(180deg); display:flex; flex-direction:column; justify-content:center; }
+.ind-card:not(.flipped) .ind-front:hover { border-color:rgba(255,159,28,.45); }
+.ind-icon { font-size:1.6rem; margin-bottom:.55rem; }
+.ind-front h3 { font-size:.93rem; font-weight:700; margin-bottom:.18rem; }
+.ind-front p  { font-size:.78rem; color:var(--dim); margin-bottom:.4rem; }
+.ind-stat { font-size:.83rem; font-weight:700; color:var(--amber); }
+.flip-hint { font-size:.65rem; color:var(--dim); margin-top:.5rem; letter-spacing:.06em; }
+.ind-back h3 { font-size:.85rem; font-weight:700; color:var(--amber); margin-bottom:.5rem; }
+.ind-back .big-num { font-size:2.4rem; font-weight:800; color:var(--red); line-height:1; margin-bottom:.4rem; }
+.ind-back p { font-size:.78rem; color:var(--dim); }
+.flip-back-hint { font-size:.62rem; color:var(--dim); margin-top:.6rem; opacity:.7; }
 
-  /* ── TIMELINE ── */
-  .tl { position: relative; padding: 2rem 0; overflow-x: auto; }
-  .tl-line { position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--red), var(--amber)); transform: translateY(-50%); }
-  .tl-items { display: flex; justify-content: space-between; position: relative; z-index: 2; min-width: 600px; }
-  .tl-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
-  .tl-item:nth-child(odd)  { flex-direction: column-reverse; padding-bottom: 2.5rem; }
-  .tl-item:nth-child(even) { padding-top: 2.5rem; }
-  .tl-dot { width: 13px; height: 13px; border-radius: 50%; background: var(--red); border: 3px solid var(--bg); flex-shrink: 0; transition: transform 0.2s, background 0.2s; }
-  .tl-item:hover .tl-dot { transform: scale(1.6); background: var(--amber); }
-  .tl-year { font-size: 1.3rem; font-weight: 800; color: var(--red); }
-  .tl-item:nth-child(even) .tl-year { color: var(--amber); }
-  .tl-title { font-size: 0.76rem; font-weight: 700; text-align: center; max-width: 100px; }
-  .tl-desc  { font-size: 0.68rem; color: var(--text-dim); text-align: center; max-width: 105px; }
+/* RISK CARDS */
+.risk-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.2rem; }
+.risk-card { border-radius:12px; padding:1.3rem; border:1px solid transparent; transition:transform .25s, box-shadow .25s; }
+.risk-card:hover { transform:translateY(-4px); box-shadow:0 8px 28px rgba(230,57,70,.1); }
+.risk-card.dark { background:var(--card);  border-color:var(--border); }
+.risk-card.lite { background:rgba(28,6,6,.9); border-color:rgba(230,57,70,.3); }
+.risk-num { font-size:1.5rem; font-weight:800; color:var(--red); margin-bottom:.2rem; }
+.risk-card h3 { font-size:.93rem; font-weight:700; margin-bottom:.35rem; }
+.risk-card p  { font-size:.79rem; color:var(--dim); margin-bottom:.35rem; }
+.risk-stat    { font-size:.79rem; font-weight:700; color:var(--amber); }
 
-  /* ── SCENARIO CARDS ── */
-  .scenario-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-  .sc-card { border-radius: 16px; padding: 1.8rem; transition: transform 0.25s; }
-  .sc-card:hover { transform: translateY(-6px); }
-  .sc-card.acc { background: #7f0000; color: #fff; }
-  .sc-card.eq  { background: var(--bg-card2); border: 2px solid var(--red); }
-  .sc-card.fr  { background: #1e0000; border: 1px solid rgba(230,57,70,0.25); }
-  .sc-badge { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 0.18rem 0.6rem; border-radius: 999px; margin-bottom: 0.7rem; }
-  .acc .sc-badge { background: rgba(255,255,255,0.2); color: #fff; }
-  .eq  .sc-badge { background: var(--red); color: #fff; }
-  .fr  .sc-badge { background: rgba(230,57,70,0.2); color: var(--red); }
-  .sc-card h3 { font-size: 1.7rem; font-weight: 800; margin-bottom: 0.6rem; }
-  .sc-card p  { font-size: 0.82rem; margin-bottom: 0.8rem; opacity: 0.88; color: #ddd; }
-  .sc-card ul { list-style: none; font-size: 0.8rem; display: flex; flex-direction: column; gap: 0.25rem; color: #ccc; }
-  .sc-card ul li::before { content: "- "; }
-  .sc-hl { font-size: 0.95rem; font-weight: 800; margin-top: 0.9rem; padding-top: 0.7rem; border-top: 1px solid rgba(255,255,255,0.15); color: var(--amber); }
-  .eq .sc-hl { color: var(--red); }
+/* TIMELINE */
+.tl { position:relative; padding:2rem 0; overflow-x:auto; }
+.tl-line { position:absolute; top:50%; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--red),var(--amber)); transform:translateY(-50%); }
+.tl-items { display:flex; justify-content:space-between; position:relative; z-index:2; min-width:580px; }
+.tl-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:.55rem; cursor:pointer; }
+.tl-item:nth-child(odd)  { flex-direction:column-reverse; padding-bottom:2.5rem; }
+.tl-item:nth-child(even) { padding-top:2.5rem; }
+.tl-dot { width:13px; height:13px; border-radius:50%; background:var(--red); border:3px solid var(--bg); flex-shrink:0; transition:transform .2s, background .2s, box-shadow .2s; }
+.tl-item:hover .tl-dot { transform:scale(1.7); background:var(--amber); box-shadow:0 0 14px rgba(255,159,28,.6); }
+.tl-year  { font-size:1.25rem; font-weight:800; color:var(--red); }
+.tl-item:nth-child(even) .tl-year { color:var(--amber); }
+.tl-title { font-size:.75rem; font-weight:700; text-align:center; max-width:95px; }
+.tl-desc  { font-size:.67rem; color:var(--dim); text-align:center; max-width:100px; }
 
-  /* ── CLOSING ── */
-  #closing { min-height: 55vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 4rem 2rem; border-top: 1px solid var(--border); }
-  .closing-wrap { max-width: 680px; }
-  .closing-wrap h2 { font-size: clamp(1.5rem, 4vw, 2.6rem); margin-bottom: 1.4rem; }
-  .closing-wrap h2 em { font-style: normal; color: var(--red); }
-  .closing-pills { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-top: 1.4rem; }
-  .closing-pills span { font-size: 0.78rem; color: var(--red); border: 1px solid rgba(230,57,70,0.3); padding: 0.3rem 0.9rem; border-radius: 999px; }
-  .closing-wrap .foot { margin-top: 1.8rem; color: var(--text-dim); font-size: 0.75rem; }
+/* SCENARIOS */
+.scenario-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.4rem; }
+.sc-card { border-radius:16px; padding:1.7rem; transition:transform .25s, box-shadow .25s; }
+.sc-card:hover { transform:translateY(-6px); box-shadow:0 12px 40px rgba(0,0,0,.4); }
+.sc-card.acc { background:#6b0000; }
+.sc-card.eq  { background:var(--card2); border:2px solid var(--red); }
+.sc-card.fr  { background:rgba(22,4,4,.95); border:1px solid rgba(230,57,70,.25); }
+.sc-badge { display:inline-block; font-size:.67rem; font-weight:700; padding:.18rem .6rem; border-radius:999px; margin-bottom:.65rem; }
+.acc .sc-badge { background:rgba(255,255,255,.2); color:#fff; }
+.eq  .sc-badge { background:var(--red); color:#fff; }
+.fr  .sc-badge { background:rgba(230,57,70,.18); color:var(--red); }
+.sc-card h3 { font-size:1.65rem; font-weight:800; margin-bottom:.55rem; }
+.sc-card p  { font-size:.81rem; margin-bottom:.75rem; color:#ccc; opacity:.9; }
+.sc-card ul { list-style:none; font-size:.79rem; display:flex; flex-direction:column; gap:.22rem; color:#bbb; }
+.sc-card ul li::before { content:"- "; }
+.sc-hl { font-size:.92rem; font-weight:800; margin-top:.85rem; padding-top:.65rem; border-top:1px solid rgba(255,255,255,.12); color:var(--amber); }
+.eq .sc-hl { color:var(--red); }
 
-  /* ── FADE IN ── */
-  .fade { opacity: 0; transform: translateY(28px); transition: opacity 0.55s ease, transform 0.55s ease; }
-  .fade.on { opacity: 1; transform: none; }
+/* CLOSING */
+#closing { min-height:55vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:4rem 2rem; border-top:1px solid var(--border); }
+.closing-wrap { max-width:680px; }
+.closing-wrap h2 { font-size:clamp(1.5rem,4vw,2.6rem); margin-bottom:1.3rem; }
+.closing-wrap h2 em { font-style:normal; color:var(--red); }
+.closing-pills { display:flex; gap:.7rem; justify-content:center; flex-wrap:wrap; margin-top:1.3rem; }
+.closing-pills span { font-size:.76rem; color:var(--red); border:1px solid rgba(230,57,70,.3); padding:.28rem .85rem; border-radius:999px; }
+.foot { margin-top:1.8rem; color:var(--dim); font-size:.73rem; }
+
+/* FADE IN */
+.fade { opacity:0; transform:translateY(26px); transition:opacity .55s ease, transform .55s ease; }
+.fade.on { opacity:1; transform:none; }
 </style>
 </head>
 <body>
+
+<!-- FULL-PAGE ANIMATED BACKGROUND -->
+<canvas id="bgCanvas"></canvas>
 
 <nav>
   <span class="nav-logo">AI 2025 Report</span>
@@ -168,7 +185,6 @@
 
 <!-- HERO -->
 <div id="hero">
-  <canvas id="netCanvas"></canvas>
   <div class="hero-inner">
     <span class="pill">Strategic Briefing &bull; 2025</span>
     <h1>The Future of<br><em>Artificial Intelligence</em></h1>
@@ -177,6 +193,7 @@
       <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
       SCROLL TO EXPLORE
     </div>
+    <p class="ripple-hint">Move your cursor &mdash; <span>click anywhere</span> to send a pulse</p>
   </div>
 </div>
 
@@ -188,19 +205,17 @@
     <div class="bar"></div>
     <p class="lead">AI is no longer emerging &mdash; it is the fastest-scaling general-purpose technology in modern history.</p>
   </div>
-
   <div class="stat-grid">
     <div class="stat-card fade"><div class="stat-num" data-pre="$" data-val="1.81" data-suf="T">$0T</div><div class="stat-label">Projected global AI market by 2030</div></div>
-    <div class="stat-card fade"><div class="stat-num amber" data-val="77" data-suf="%">0%</div><div class="stat-label">of devices already use some form of AI</div></div>
+    <div class="stat-card fade"><div class="stat-num amb" data-val="77" data-suf="%">0%</div><div class="stat-label">of devices already use some form of AI</div></div>
     <div class="stat-card fade"><div class="stat-num" data-val="4.4" data-suf="x">0x</div><div class="stat-label">Productivity lift among generative-AI users (McKinsey)</div></div>
-    <div class="stat-card fade"><div class="stat-num amber" data-val="97" data-suf="M">0M</div><div class="stat-label">AI-related jobs expected globally by 2025 (WEF)</div></div>
+    <div class="stat-card fade"><div class="stat-num amb" data-val="97" data-suf="M">0M</div><div class="stat-label">AI-related jobs expected globally by 2025 (WEF)</div></div>
     <div class="stat-card fade"><div class="stat-num" data-val="83" data-suf="%">0%</div><div class="stat-label">of companies cite AI as a top strategic priority</div></div>
-    <div class="stat-card fade"><div class="stat-num amber" data-val="36" data-suf="%">0%</div><div class="stat-label">Compound annual growth rate, 2024&ndash;2030</div></div>
+    <div class="stat-card fade"><div class="stat-num amb" data-val="36" data-suf="%">0%</div><div class="stat-label">Compound annual growth rate, 2024&ndash;2030</div></div>
   </div>
-
   <div class="chart-card fade">
     <h3>Training compute growth &mdash; frontier models (petaFLOP-days, log scale) &mdash; hover for values</h3>
-    <canvas id="computeChart" height="260"></canvas>
+    <canvas id="computeChart" height="250"></canvas>
   </div>
 </section>
 
@@ -214,7 +229,7 @@
   </div>
   <div class="chart-card fade">
     <h3>Months to reach 100 million users &mdash; hover a bar for details</h3>
-    <canvas id="adoptionChart" height="300"></canvas>
+    <canvas id="adoptionChart" height="290"></canvas>
   </div>
 </section>
 
@@ -224,15 +239,118 @@
     <p class="tag">03 &mdash; Impact</p>
     <h2>Where AI Is Already Working</h2>
     <div class="bar"></div>
-    <p class="lead">Six industries, six measurable shifts.</p>
+    <p class="lead">Six industries, six measurable shifts. <span style="color:var(--amber);font-size:.85rem">Tap any card to flip it.</span></p>
   </div>
   <div class="industry-grid">
-    <div class="ind-card fade"><div class="ind-icon">&#x1FA7A;</div><h3>Healthcare</h3><p>Diagnostic imaging &amp; drug discovery</p><div class="ind-stat">94% accuracy in early cancer detection</div></div>
-    <div class="ind-card fade"><div class="ind-icon">&#x1F4B3;</div><h3>Finance</h3><p>Fraud detection &amp; algorithmic trading</p><div class="ind-stat">$10B+ fraud prevented annually</div></div>
-    <div class="ind-card fade"><div class="ind-icon">&#x1F697;</div><h3>Mobility</h3><p>Autonomous driving &amp; route optimization</p><div class="ind-stat">40M miles driven autonomously per week</div></div>
-    <div class="ind-card fade"><div class="ind-icon">&#x1F3ED;</div><h3>Manufacturing</h3><p>Predictive maintenance &amp; quality control</p><div class="ind-stat">30% downtime reduction</div></div>
-    <div class="ind-card fade"><div class="ind-icon">&#x1F393;</div><h3>Education</h3><p>Personalized tutoring at scale</p><div class="ind-stat">2x learning gains in pilots</div></div>
-    <div class="ind-card fade"><div class="ind-icon">&#x1F33E;</div><h3>Agriculture</h3><p>Yield prediction &amp; precision irrigation</p><div class="ind-stat">20% water savings</div></div>
+
+    <div class="ind-card fade" onclick="this.classList.toggle('flipped')">
+      <div class="ind-inner">
+        <div class="ind-front">
+          <div class="ind-icon">&#x1FA7A;</div>
+          <h3>Healthcare</h3>
+          <p>Diagnostic imaging &amp; drug discovery</p>
+          <div class="ind-stat">94% accuracy in early cancer detection</div>
+          <div class="flip-hint">Tap to learn more &rarr;</div>
+        </div>
+        <div class="ind-back">
+          <h3>Healthcare</h3>
+          <div class="big-num">94%</div>
+          <p>AI diagnostic accuracy now exceeds the average specialist&mdash;catching tumors earlier and reducing misdiagnosis rates across radiology and pathology.</p>
+          <div class="flip-back-hint">Tap to flip back</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ind-card fade" onclick="this.classList.toggle('flipped')">
+      <div class="ind-inner">
+        <div class="ind-front">
+          <div class="ind-icon">&#x1F4B3;</div>
+          <h3>Finance</h3>
+          <p>Fraud detection &amp; algorithmic trading</p>
+          <div class="ind-stat">$10B+ fraud prevented annually</div>
+          <div class="flip-hint">Tap to learn more &rarr;</div>
+        </div>
+        <div class="ind-back">
+          <h3>Finance</h3>
+          <div class="big-num">$10B+</div>
+          <p>Real-time AI models analyze millions of transactions per second, flagging anomalies humans would never catch at that speed or scale.</p>
+          <div class="flip-back-hint">Tap to flip back</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ind-card fade" onclick="this.classList.toggle('flipped')">
+      <div class="ind-inner">
+        <div class="ind-front">
+          <div class="ind-icon">&#x1F697;</div>
+          <h3>Mobility</h3>
+          <p>Autonomous driving &amp; route optimization</p>
+          <div class="ind-stat">40M miles driven autonomously per week</div>
+          <div class="flip-hint">Tap to learn more &rarr;</div>
+        </div>
+        <div class="ind-back">
+          <h3>Mobility</h3>
+          <div class="big-num">40M</div>
+          <p>Miles per week driven by AI systems&mdash;roughly the distance from Earth to the Moon and back, every seven days, without a human at the wheel.</p>
+          <div class="flip-back-hint">Tap to flip back</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ind-card fade" onclick="this.classList.toggle('flipped')">
+      <div class="ind-inner">
+        <div class="ind-front">
+          <div class="ind-icon">&#x1F3ED;</div>
+          <h3>Manufacturing</h3>
+          <p>Predictive maintenance &amp; quality control</p>
+          <div class="ind-stat">30% downtime reduction</div>
+          <div class="flip-hint">Tap to learn more &rarr;</div>
+        </div>
+        <div class="ind-back">
+          <h3>Manufacturing</h3>
+          <div class="big-num">30%</div>
+          <p>AI predicts equipment failures before they happen&mdash;a 30% downtime cut is equivalent to gaining more than two extra months of production output per year.</p>
+          <div class="flip-back-hint">Tap to flip back</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ind-card fade" onclick="this.classList.toggle('flipped')">
+      <div class="ind-inner">
+        <div class="ind-front">
+          <div class="ind-icon">&#x1F393;</div>
+          <h3>Education</h3>
+          <p>Personalized tutoring at scale</p>
+          <div class="ind-stat">2x learning gains in pilots</div>
+          <div class="flip-hint">Tap to learn more &rarr;</div>
+        </div>
+        <div class="ind-back">
+          <h3>Education</h3>
+          <div class="big-num">2x</div>
+          <p>Students using AI tutors in controlled pilots achieved in six months what previously required twelve&mdash;with the biggest gains among those furthest behind.</p>
+          <div class="flip-back-hint">Tap to flip back</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ind-card fade" onclick="this.classList.toggle('flipped')">
+      <div class="ind-inner">
+        <div class="ind-front">
+          <div class="ind-icon">&#x1F33E;</div>
+          <h3>Agriculture</h3>
+          <p>Yield prediction &amp; precision irrigation</p>
+          <div class="ind-stat">20% water savings</div>
+          <div class="flip-hint">Tap to learn more &rarr;</div>
+        </div>
+        <div class="ind-back">
+          <h3>Agriculture</h3>
+          <div class="big-num">20%</div>
+          <p>AI-driven irrigation systems apply water only where and when crops need it&mdash;a 20% reduction equivalent to the annual drinking water supply of 500 million people.</p>
+          <div class="flip-back-hint">Tap to flip back</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -250,15 +368,14 @@
     <div class="risk-card dark fade"><div class="risk-num">03</div><h3>Job Displacement</h3><p>Automation will reshape 300M+ roles globally by 2030.</p><div class="risk-stat">~14% of workers may need a full occupation change (OECD)</div></div>
     <div class="risk-card lite fade"><div class="risk-num">04</div><h3>Safety &amp; Alignment</h3><p>Ensuring frontier systems behave as intended at scale.</p><div class="risk-stat">50+ governments signed onto AI safety frameworks</div></div>
   </div>
-
-  <div class="two-col" style="margin-top:1.8rem">
+  <div class="two-col" style="margin-top:1.7rem">
     <div class="chart-card fade">
       <h3>Global trust sentiment &mdash; hover to explore</h3>
-      <canvas id="trustChart" height="250"></canvas>
+      <canvas id="trustChart" height="240"></canvas>
     </div>
     <div class="chart-card fade">
       <h3>AI positivity by region &mdash; hover for %</h3>
-      <canvas id="regionalChart" height="250"></canvas>
+      <canvas id="regionalChart" height="240"></canvas>
     </div>
   </div>
 </section>
@@ -275,32 +392,27 @@
     <div class="tl-line"></div>
     <div class="tl-items">
       <div class="tl-item">
-        <div class="tl-year">2025</div>
-        <div class="tl-dot"></div>
+        <div class="tl-year">2025</div><div class="tl-dot"></div>
         <div class="tl-title">AI Agents Go Mainstream</div>
         <div class="tl-desc">Autonomous agents in 25% of enterprise workflows</div>
       </div>
       <div class="tl-item">
-        <div class="tl-year">2027</div>
-        <div class="tl-dot"></div>
+        <div class="tl-year">2027</div><div class="tl-dot"></div>
         <div class="tl-title">Multimodal Default</div>
-        <div class="tl-desc">Vision, audio, and text models surpass humans on knowledge-work benchmarks</div>
+        <div class="tl-desc">Vision, audio, and text models surpass humans on knowledge benchmarks</div>
       </div>
       <div class="tl-item">
-        <div class="tl-year">2029</div>
-        <div class="tl-dot"></div>
+        <div class="tl-year">2029</div><div class="tl-dot"></div>
         <div class="tl-title">AI-Designed Drugs</div>
         <div class="tl-desc">First FDA-approved AI-discovered therapeutics</div>
       </div>
       <div class="tl-item">
-        <div class="tl-year">2032</div>
-        <div class="tl-dot"></div>
+        <div class="tl-year">2032</div><div class="tl-dot"></div>
         <div class="tl-title">Embodied AI</div>
-        <div class="tl-desc">Humanoid and service robots ship 5M+ units per year globally</div>
+        <div class="tl-desc">Humanoid robots ship 5M+ units per year globally</div>
       </div>
       <div class="tl-item">
-        <div class="tl-year">2035</div>
-        <div class="tl-dot"></div>
+        <div class="tl-year">2035</div><div class="tl-dot"></div>
         <div class="tl-title">AGI Threshold Debate</div>
         <div class="tl-desc">Frontier systems contest expert performance everywhere</div>
       </div>
@@ -336,7 +448,7 @@
       <h3>Friction</h3>
       <p>Safety incidents, compute bottlenecks, or geopolitics fragment global AI development.</p>
       <ul><li>Splintered model ecosystems</li><li>Trust collapse in synthetic media</li><li>Innovation drag in regulated sectors</li></ul>
-      <div class="sc-hl" style="color:#e63946">-$3T opportunity cost</div>
+      <div class="sc-hl" style="color:var(--red)">-$3T opportunity cost</div>
     </div>
   </div>
 </section>
@@ -355,118 +467,247 @@
 </div>
 
 <script>
-/* ── NEURAL NET ── */
-const C = document.getElementById('netCanvas');
+/* ════════════════════════════════════════════
+   FULL-PAGE NEURAL NETWORK BACKGROUND
+   ════════════════════════════════════════════ */
+const C  = document.getElementById('bgCanvas');
 const cx = C.getContext('2d');
-let pts = [];
 
-function sz() { C.width = C.offsetWidth; C.height = C.offsetHeight; }
-sz(); window.addEventListener('resize', sz);
+function resize() { C.width = window.innerWidth; C.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
 
-for (let i = 0; i < 55; i++)
-  pts.push({ x: Math.random(), y: Math.random(), vx: (Math.random()-.5)*.00025, vy: (Math.random()-.5)*.00025, r: Math.random()*2.5+1.5 });
+// Nodes
+const NUM = 90;
+let pts = Array.from({length: NUM}, () => ({
+  x:  Math.random() * window.innerWidth,
+  y:  Math.random() * window.innerHeight,
+  vx: (Math.random() - .5) * .35,
+  vy: (Math.random() - .5) * .35,
+  r:  Math.random() * 2.5 + 1.5,
+  phase: Math.random() * Math.PI * 2   // for pulse
+}));
 
-(function loop() {
-  cx.clearRect(0,0,C.width,C.height);
-  const W=C.width, H=C.height;
-  pts.forEach(p => {
-    p.x+=p.vx; p.y+=p.vy;
-    if(p.x<0||p.x>1) p.vx*=-1;
-    if(p.y<0||p.y>1) p.vy*=-1;
+// Mouse / touch
+let mouse = { x: -999, y: -999 };
+window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+window.addEventListener('touchmove', e => {
+  mouse.x = e.touches[0].clientX;
+  mouse.y = e.touches[0].clientY;
+}, { passive: true });
+window.addEventListener('touchend', () => { mouse.x = -999; mouse.y = -999; });
+
+// Ripples (click / tap)
+let ripples = [];
+window.addEventListener('click', e => {
+  // don't ripple on nav links or cards
+  ripples.push({ x: e.clientX, y: e.clientY, r: 0, max: 260, born: performance.now() });
+});
+window.addEventListener('touchstart', e => {
+  ripples.push({ x: e.touches[0].clientX, y: e.touches[0].clientY, r: 0, max: 260, born: performance.now() });
+}, { passive: true });
+
+let t = 0;
+
+function netColor(alpha, shift) {
+  // Color drifts between red and amber based on scroll position + time
+  const scrollPct = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+  const wave = (Math.sin(scrollPct * Math.PI * 2 + t * .0008 + (shift || 0)) + 1) / 2;
+  const r = Math.round(230 + (255 - 230) * wave);
+  const g = Math.round(57  + (159 -  57) * wave);
+  const b = Math.round(70  + ( 28 -  70) * wave);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+(function loop(now) {
+  t = now;
+  cx.clearRect(0, 0, C.width, C.height);
+
+  const W = C.width, H = C.height;
+  const REPEL = 140, SPEED_CAP = 2.2;
+
+  // Update + draw ripples first (behind nodes)
+  ripples = ripples.filter(rp => {
+    rp.r += 3.5;
+    const age = (now - rp.born) / 1000;
+    const alpha = Math.max(0, .55 - age * .55);
+    if (alpha <= 0) return false;
+
+    // Push nodes
+    pts.forEach(p => {
+      const dx = p.x - rp.x, dy = p.y - rp.y;
+      const d  = Math.hypot(dx, dy);
+      const band = 40;
+      if (Math.abs(d - rp.r) < band && d > 1) {
+        const fade  = 1 - Math.abs(d - rp.r) / band;
+        const force = fade * 3.5 / (d * .15 + 1);
+        p.vx += (dx / d) * force;
+        p.vy += (dy / d) * force;
+      }
+    });
+
+    // Draw ring
+    cx.save();
+    cx.strokeStyle = netColor(alpha, .5);
+    cx.lineWidth   = 2;
+    cx.shadowColor = netColor(.7, .5);
+    cx.shadowBlur  = 10;
+    cx.beginPath();
+    cx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
+    cx.stroke();
+    cx.restore();
+    return true;
   });
-  for (let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
-    const a=pts[i],b=pts[j],dx=(a.x-b.x)*W,dy=(a.y-b.y)*H,d=Math.hypot(dx,dy);
-    if(d<150){ cx.strokeStyle=`rgba(230,57,70,${.35*(1-d/150)})`; cx.lineWidth=.7; cx.beginPath(); cx.moveTo(a.x*W,a.y*H); cx.lineTo(b.x*W,b.y*H); cx.stroke(); }
-  }
-  pts.forEach(p=>{ cx.beginPath(); cx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2); cx.fillStyle='rgba(230,57,70,0.75)'; cx.fill(); });
-  requestAnimationFrame(loop);
-})();
 
-/* ── SCROLL FADE ── */
+  // Update nodes
+  pts.forEach((p, i) => {
+    // Mouse repulsion
+    const mdx = p.x - mouse.x, mdy = p.y - mouse.y;
+    const md  = Math.hypot(mdx, mdy);
+    if (md < REPEL && md > 0) {
+      const force = ((REPEL - md) / REPEL) * 1.2;
+      p.vx += (mdx / md) * force;
+      p.vy += (mdy / md) * force;
+    }
+
+    // Dampen
+    p.vx *= .97;
+    p.vy *= .97;
+
+    // Cap speed
+    const spd = Math.hypot(p.vx, p.vy);
+    if (spd > SPEED_CAP) { p.vx = p.vx / spd * SPEED_CAP; p.vy = p.vy / spd * SPEED_CAP; }
+
+    // Move (nodes move in absolute screen coords, wrap around viewport)
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < -20)   p.x = W + 20;
+    if (p.x > W + 20) p.x = -20;
+    if (p.y < -20)   p.y = H + 20;
+    if (p.y > H + 20) p.y = -20;
+  });
+
+  // Draw connections
+  cx.save();
+  for (let i = 0; i < pts.length; i++) {
+    for (let j = i + 1; j < pts.length; j++) {
+      const a = pts[i], b = pts[j];
+      const d = Math.hypot(a.x - b.x, a.y - b.y);
+      if (d < 155) {
+        const alpha = .45 * (1 - d / 155);
+        cx.strokeStyle = netColor(alpha, i * .1);
+        cx.lineWidth   = .9;
+        cx.shadowBlur  = 0;
+        cx.beginPath();
+        cx.moveTo(a.x, a.y);
+        cx.lineTo(b.x, b.y);
+        cx.stroke();
+      }
+    }
+  }
+  cx.restore();
+
+  // Draw nodes
+  cx.save();
+  pts.forEach((p, i) => {
+    const pulse = Math.sin(t * .001 * 1.5 + p.phase) * .6 + 1;
+    const r = p.r * pulse;
+    cx.shadowColor = netColor(.9, i * .08);
+    cx.shadowBlur  = 10;
+    cx.fillStyle   = netColor(.85, i * .08);
+    cx.beginPath();
+    cx.arc(p.x, p.y, r, 0, Math.PI * 2);
+    cx.fill();
+  });
+  cx.restore();
+
+  requestAnimationFrame(loop);
+})(0);
+
+/* ════════════════════════════════════════════
+   SCROLL FADE-IN + COUNTERS
+   ════════════════════════════════════════════ */
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.classList.add('on');
-      e.target.querySelectorAll('[data-val]').forEach(counter);
+      e.target.querySelectorAll('[data-val]').forEach(runCounter);
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: .12 });
 document.querySelectorAll('.fade').forEach(el => obs.observe(el));
 
-/* ── COUNTERS ── */
-function counter(el) {
+function runCounter(el) {
   if (el._done) return; el._done = true;
   const target = parseFloat(el.dataset.val);
   const pre = el.dataset.pre || '';
   const suf = el.dataset.suf || '';
   const dec = target % 1 !== 0;
-  const t0 = performance.now();
+  const t0  = performance.now();
   (function tick(now) {
-    const p = Math.min((now-t0)/1300, 1);
-    const v = (1-Math.pow(1-p,3)) * target;
+    const p = Math.min((now - t0) / 1300, 1);
+    const v = (1 - Math.pow(1 - p, 3)) * target;
     el.textContent = pre + (dec ? v.toFixed(2) : Math.round(v)) + suf;
     if (p < 1) requestAnimationFrame(tick);
   })(t0);
 }
 
-/* ── CHART DEFAULTS ── */
-const tip = { backgroundColor:'#130505', borderColor:'#e63946', borderWidth:1, titleColor:'#e63946', bodyColor:'#f5eeee' };
-const gridColor = 'rgba(230,57,70,0.07)';
+/* ════════════════════════════════════════════
+   CHARTS
+   ════════════════════════════════════════════ */
+const tip = { backgroundColor:'#0e0404', borderColor:'#e63946', borderWidth:1, titleColor:'#e63946', bodyColor:'#f5eeee' };
+const grid = 'rgba(230,57,70,0.07)';
 
-/* ── COMPUTE ── */
 new Chart('computeChart', {
-  type: 'line',
-  data: {
-    labels: ['2012','2014','2016','2018','2020','2022','2024'],
-    datasets: [{ label: 'petaFLOP-days', data: [.01,.10,2.3,40,1500,45000,380000],
+  type:'line',
+  data:{
+    labels:['2012','2014','2016','2018','2020','2022','2024'],
+    datasets:[{ label:'petaFLOP-days', data:[.01,.10,2.3,40,1500,45000,380000],
       borderColor:'#e63946', backgroundColor:'rgba(230,57,70,0.07)', borderWidth:2.5,
       pointBackgroundColor:'#ff9f1c', pointRadius:6, pointHoverRadius:9, fill:true, tension:.4 }]
   },
-  options: { responsive:true, interaction:{mode:'index',intersect:false},
+  options:{ responsive:true, interaction:{mode:'index',intersect:false},
     plugins:{ legend:{labels:{color:'#9a8585',font:{size:11}}}, tooltip:{...tip, callbacks:{label:c=>` ${c.raw.toLocaleString()} petaFLOP-days`}} },
-    scales:{ x:{ticks:{color:'#9a8585'},grid:{color:gridColor}}, y:{type:'logarithmic',ticks:{color:'#9a8585',callback:v=>v>=1000?(v/1000)+'K':v},grid:{color:gridColor}} }
+    scales:{ x:{ticks:{color:'#9a8585'},grid:{color:grid}}, y:{type:'logarithmic',ticks:{color:'#9a8585',callback:v=>v>=1000?(v/1000)+'K':v},grid:{color:grid}} }
   }
 });
 
-/* ── ADOPTION ── */
 new Chart('adoptionChart', {
-  type: 'bar',
-  data: {
-    labels: ['ChatGPT','TikTok','Instagram','Facebook','Spotify','Internet','Mobile phones'],
-    datasets: [{ label: 'Months to 100M users', data: [2,9,30,54,55,84,192],
-      backgroundColor: ['#e63946','#ff9f1c','#ff9f1c','#ff9f1c','#ff9f1c','#ff9f1c','#ff9f1c'],
+  type:'bar',
+  data:{
+    labels:['ChatGPT','TikTok','Instagram','Facebook','Spotify','Internet','Mobile phones'],
+    datasets:[{ label:'Months to 100M users', data:[2,9,30,54,55,84,192],
+      backgroundColor:['#e63946','#ff9f1c','#ff9f1c','#ff9f1c','#ff9f1c','#ff9f1c','#ff9f1c'],
       borderRadius:6, hoverBackgroundColor:'#fff' }]
   },
-  options: { indexAxis:'y', responsive:true, interaction:{mode:'index',intersect:false},
+  options:{ indexAxis:'y', responsive:true, interaction:{mode:'index',intersect:false},
     plugins:{ legend:{display:false}, tooltip:{...tip, callbacks:{label:c=>` ${c.raw} months`}} },
-    scales:{ x:{ticks:{color:'#9a8585'},grid:{color:gridColor}}, y:{ticks:{color:'#f5eeee'},grid:{display:false}} }
+    scales:{ x:{ticks:{color:'#9a8585'},grid:{color:grid}}, y:{ticks:{color:'#f5eeee'},grid:{display:false}} }
   }
 });
 
-/* ── TRUST DONUT ── */
 new Chart('trustChart', {
-  type: 'doughnut',
-  data: {
-    labels: ['Trust AI companies (35%)','Distrust (39%)','Unsure (26%)'],
-    datasets: [{ data:[35,39,26], backgroundColor:['#e63946','#ff9f1c','#4b4040'], hoverOffset:10, borderWidth:0 }]
+  type:'doughnut',
+  data:{
+    labels:['Trust AI companies (35%)','Distrust (39%)','Unsure (26%)'],
+    datasets:[{ data:[35,39,26], backgroundColor:['#e63946','#ff9f1c','#3a2020'], hoverOffset:10, borderWidth:0 }]
   },
-  options: { cutout:'60%',
+  options:{ cutout:'60%',
     plugins:{ legend:{position:'bottom',labels:{color:'#9a8585',font:{size:11},padding:10}}, tooltip:{...tip} }
   }
 });
 
-/* ── REGIONAL ── */
 new Chart('regionalChart', {
-  type: 'bar',
-  data: {
-    labels: ['China','India','Brazil','Germany','UK','USA'],
-    datasets: [{ label:'% Positive on AI', data:[78,76,57,37,38,39],
+  type:'bar',
+  data:{
+    labels:['China','India','Brazil','Germany','UK','USA'],
+    datasets:[{ label:'% Positive on AI', data:[78,76,57,37,38,39],
       backgroundColor:['#e63946','#e63946','#e63946','#ff9f1c','#ff9f1c','#ff9f1c'],
       borderRadius:6, hoverBackgroundColor:'#fff' }]
   },
-  options: { responsive:true, interaction:{mode:'index',intersect:false},
+  options:{ responsive:true, interaction:{mode:'index',intersect:false},
     plugins:{ legend:{display:false}, tooltip:{...tip, callbacks:{label:c=>` ${c.raw}% positive`}} },
-    scales:{ x:{ticks:{color:'#9a8585'},grid:{display:false}}, y:{max:100,ticks:{color:'#9a8585',callback:v=>v+'%'},grid:{color:gridColor}} }
+    scales:{ x:{ticks:{color:'#9a8585'},grid:{display:false}}, y:{max:100,ticks:{color:'#9a8585',callback:v=>v+'%'},grid:{color:grid}} }
   }
 });
 </script>
